@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>AnimationSequence</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="AnimationSequence.js"></script>
+</head>
+<body>
+
+<style type="text/css">
+div#box {
+	position: absolute;
+	top: 200px;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	width: 100px;
+	height: 100px;
+	color: #000000;
+	background-color: #0000CC;
+	border: solid 1px #333333; 
+}
+div#tiny {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	width: 10px;
+	height: 10px;
+	color: #FFFFFF;
+	background-color: #000000;
+}
+</style>
+
+<div id="box"><div id="tiny">&nbsp;</div></div>
+
+<p style="text-align:right;">
+	<input type="button" value="Play" onclick="as.play();" />
+	<input type="button" value="Pause" onclick="as.pause();" />
+	<input type="button" value="Stop" onclick="as.stop();" />
+	<input type="button" value="Play Loop" onclick="as.playLoop();" />
+</p>
+
+<h2>Alpha transition testing background.</h2>
+
+<script type="text/javascript">
+var as = new AnimationSequence();
+//as.onstop = function() { alert('done'); };
+var tgt = as.addTarget(document.getElementById('box'));
+var tiny = as.addTarget(document.getElementById('tiny'));
+var seg = tgt.addSegment(30);
+seg.addTransform(as.props.backgroundColor, '#0000CC', '#CC0000');
+seg.addTransform(as.props.top, 200, 0, ASMotion.deceleration);
+seg.addTransform(as.props.left, 0, 199, ASMotion.cubic);
+seg.addTransform(as.props.opacity, 1, 0);
+var tseg = tiny.addSegment(30);
+tseg.addTransform(as.props.top, 45, 0);
+tseg.addTransform(as.props.left, 0, 45);
+var seg2 = tgt.addSegment(30);
+seg2.addTransform(as.props.backgroundColor, '#CC0000', '#0000CC');
+seg2.addTransform(as.props.top, 0, 200, ASMotion.acceleration);
+seg2.addTransform(as.props.left, 200, 399, ASMotion.cubic);
+seg2.addTransform(as.props.opacity, 0, 1);
+var tseg2 = tiny.addSegment(30);
+tseg2.addTransform(as.props.top, 0, 45);
+tseg2.addTransform(as.props.left, 45, 90);
+var seg3 = tgt.addSegment(30);
+seg3.addTransform(as.props.backgroundColor, '#0000CC', '#00CC00');
+seg3.addTransform(as.props.top, 200, 400, ASMotion.deceleration);
+seg3.addTransform(as.props.left, 400, 599, ASMotion.cubic);
+var tseg3 = tiny.addSegment(30);
+tseg3.addTransform(as.props.top, 45, 90);
+tseg3.addTransform(as.props.left, 90, 45);
+var seg4 = tgt.addSegment(30);
+seg4.addTransform(as.props.backgroundColor, '#00CC00', '#0000CC');
+seg4.addTransform(as.props.top, 400, 200, ASMotion.acceleration);
+seg4.addTransform(as.props.left, 600, 800, ASMotion.cubic);
+var tseg4 = tiny.addSegment(30);
+tseg4.addTransform(as.props.top, 90, 45);
+tseg4.addTransform(as.props.left, 45, 0);
+as.compile();
+</script>
+
+
+</body>
+</html>

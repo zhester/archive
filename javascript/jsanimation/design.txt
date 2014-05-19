@@ -1,0 +1,126 @@
+JavaScript Animation Suite
+
+Goal: Design an abstract interface to aid in repetitious coding of animating
+DOM elements.
+
+
+
+
+
+
+== Important Objects ==
+
+-- Target Object --
+The DOM element that will be affected by an animation sequence.
+Properties of this element may be transformed during animation.
+	- style.opacity
+	- style.left
+	- style.top
+	- style.right
+	- style.bottom
+	- style.width
+	- style.height
+	- style.zIndex
+	- style.color
+	- style.backgroundColor
+	- style.backgroundPosition
+	- className
+	- style.rotation (when CSS3 supports it)
+	- nothing (for padding out timelines)
+	- user-supplied property
+	- user-supplied function
+
+-- Animation Sequence --
+A sequence may effect multiple target objects (one is required).
+A sequence can be made up of multiple segments (one is required).
+
+-- Animation Segment --
+An animation segment is used to drive all property list evaluations
+and request new values for each property based on the current frame.
+The frame number is only relative to the segment, and not the global
+timeline (although, it will be available).
+Each animation segment has a predefined total number of frames.
+The starting and ending values of the transform are known for a
+particular property.
+A segment applies to only one object.
+
+
+
+//Create a new sequence (frames per second).
+var as = new AnimationSequence(12);
+
+//Add a target object (DOM element).
+var tgt = as.addTarget(document.getElementById('something'));
+
+//Add an animation segment to the object (number of frames).
+var seg1 = tgt.addSegment(40);
+
+//Define the tranformations (property,start,stop,motion_function).
+seg1.addTransform(as.props.LEFT, 0, 200, as.motion.linear);
+seg1.addTransform(as.props.TOP, 0, 200, as.motion.acceleration);
+
+//Add another segment with a couple tranformations.
+var seg2 = tgt.addSegment(40);
+seg2.addTransform(as.props.LEFT, 200, 400, as.motion.deceleration);
+seg2.addTransform(as.props.TOP, 200, 400, as.motion.bounce);
+
+//Play the animation.
+as.play();
+
+//Play in a loop (number of loops).
+as.playLoop();
+
+//Skip the whole thing to a particular frame [future feature].
+as.setFrameIndex(50);
+as.play();
+
+
+** Each addSegment, extends the length of a target's animation by the number
+	of provided frames.  For "parallel" animation, add multiple targets.
+** It would be best optimized to only use one AnimationSequence object for
+	all animation on a page, but it is not required.  This allows the page
+	to use a "master" frame clock and handle fewer timer events.
+** Each property is understood in its context, so when specifying start
+	and stop values, they will have to make sense for that property.
+	The units are determined as a default unit for that property.  To
+	use a different unit, this needs to be set before adding those transforms.
+as.setUnit(as.props.LEFT, 'em');
+as.setUnit(as.props.OPACITY, '%');
+** Color transforms are unique and will need to be dealt with via
+	calculated morph parameters.
+** Motion functions should be user defineable.
+** Motion functions take in frames from 0 to MAX-1
+** motion.X(FRAME, START, STOP)
+	- returns a non-unitized value (int, float, string)
+** Motion calculation functions only take fractions from 0 to 1
+	indicating segment progress.  They return fractions 0 to 1
+	indicating transform progress.  The return is used against the
+	net transform delta: (end - start) * motion
+
+Pre-built motions:
+	- Acceleration (square)
+	- Deceleration (square)
+	- Linear
+	- Sine (between start and stop... approx, uses accel/decel)
+	- Bounce (transient... 63% damped sine)
+	- Gravity (constant)
+
+** Beginnings and endings of segments can fire primitive events.  Add a
+	function call using:
+segment_object.setStartListener(myfunction);
+segment_object.setEndListener(myfunction);
+sequence_object.setStartListener(myfunction);
+sequence_object.setEndListener(myfunction);
+sequence_object.setFrameListener(myfunction, frame_number);
+segment_object.setFrameListener(myfunction, frame_number);
+
+
+
+
+
+Future ideas:
+- Overlay grids/snapping, guides/pathing, and clipping/boundaries
+- Extend into UI widgets
+- Extend to a "stage" scenario where parent handling can be streamlined
+
+
