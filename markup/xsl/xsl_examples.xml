@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="/flat/xml/xsl_examples.xsl"?>
+<rootnode>
+	<doctitle type="testtype" att="test string">A Family of Nodes</doctitle>
+	<parent>
+		<name>Parent Name 1</name>
+		<nickname>Dad</nickname>
+		<child>
+			<name>Child Name 1a</name>
+			<nickname>Jorge</nickname>
+		</child>
+	</parent>
+	<parent>
+		<name>Parent Name 2</name>
+		<nickname>Pa</nickname>
+		<child>
+			<name>Child <strong>Name</strong> 2a</name>
+			<nickname>Fred</nickname>
+		</child>
+		<child>
+			<name>Child Name 2b</name>
+			<nickname>Tim</nickname>
+		</child>
+	</parent>
+	<parent>
+		<name>Parent Name 3</name>
+		<nickname>Pa</nickname>
+		<child>
+			<name>Child Name 3a</name>
+			<nickname>Fred</nickname>
+		</child>
+		<child>
+			<name>Child Name 3b</name>
+			<nickname>Tim</nickname>
+		</child>
+	</parent>
+</rootnode>

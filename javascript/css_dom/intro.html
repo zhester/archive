@@ -1,0 +1,26 @@
+<h1>CSS DOM Extension</h1>
+<p>
+	I've been working with a lot of client-side scripting lately, and seem
+	to keep running into situations where it would simplify life (and improve
+	performance) if I could hook into the existing style sheets and modify
+	visual styling on a document-wide level (instead of manipulating individual
+	elements and/or goofing around with class membership).
+</p>
+<p>
+	This code extends the CSS DOM capabilities of a compliant browser to
+	enable flexible access to styling rules.
+</p>
+<p>
+	The important feature is the addition of the applyStyle() method to
+	the CSSStyleSheet object.  This method accepts a selector string,
+	a CSS property name, and a CSS style value.  If the selector is
+	found to already exist in the style sheet, the rule is updated (to
+	preserve the order of fall-through styles).  Another important
+	feature is the addition of the removeStyle() method which allows a
+	script to completely remove a style rule section based on an accurate
+	specification of the selector for that rule.
+</p>
+<p>
+	Note: This probably won't work in MSIE.  Adapting for use in that
+	browser is left as an exercise for the reader.
+</p>

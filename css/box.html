@@ -1,0 +1,53 @@
+<h1>CSS2 Rounded Box</h1>
+
+<p>
+	For browsers that provide strong CSS2 support and PNG-24
+	rendering, here is a method to provide a somewhat stylish rounded
+	box based on a very primitive document fragment.
+</p>
+
+<h2>Document Fragment</h2>
+<?php display_code('.example'); ?>
+<p>
+	For this to work, we need to use two semantically-null elements.
+	First, we need to know what parts of the document will be included
+	in the box.  This is the surrounding <code>&lt;div&gt;</code>.
+	It's also convenient to use this <code>&lt;div&gt;</code> tag as
+	the root for selectors.  Second, we need to allow any kind and any
+	number of interior block elements in the body of the box.  Thus,
+	we need another document delimiter (the interior
+	<code>&lt;div&gt;</code> tag).  Since these demarcations have no
+	relevance to the information, it's okay to use semantically-null
+	elements.  The regions where the information needs to be marked,
+	are the heading and any body elements (which remain unknown to
+	this style sheet).
+</p>
+
+<h2>Example</h2>
+<?php deliver_code('.example'); ?>
+
+<h2>Style Sheet</h2>
+<?php display_code('.css'); ?>
+<p>
+	To download the images, just follow the URLs in the style sheet,
+	or use a browser that allows you to "View background image..."
+	or "Save background as..."
+</p>
+
+<h2>Future Plans</h2>
+<p>
+	It will always be a dream of mine to allow this same document
+	fragment to be styled with the maximum versatility:
+</p>
+<ul>
+	<li>The corner images must be placed as independent images.</li>
+	<li>The other images must tile on all four edges (removing the
+		maximum width limitation).</li>
+	<li>The exterior areas of the box (where the rounding leaves space
+		"behind" the box) must be transparent to allow the exterior
+		background (or content) to remain visible.  The current
+		solutions rely on the graphics' backgrounds to cover up parts of
+		other graphics.</li>
+	<li>After all that, it might be nice to use some actual background
+		images to pretty-up the interior of the box.</li>
+</ul>

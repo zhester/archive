@@ -1,0 +1,25 @@
+# Examples of a few settings that might be helpful for future reference.
+
+php_value arg_separator.input "&"
+php_value arg_separator.output "&amp;"
+
+php_value auto_prepend_file "/path/startfile.php"
+php_value auto_append_file "/path/endfile.php"
+
+php_value default_charset "utf-8"
+php_value default_mimetype "text/html"
+
+# ZIH - not sure about this anymore
+php_value error_reporting "2047" # Development
+php_value error_reporting "81" # Production 1|16|64
+
+php_flag file_uploads on
+
+php_value memory_limit "8M"
+php_value post_max_size "8M"
+php_value upload_max_filesize "8M"
+
+php_value session.cookie_lifetime "0" # Seconds a session cookie lives
+php_value session.gc_maxlifetime "1440" # Seconds session data lives
+php_value session.name "sess"
+php_flag session.use_cookies on

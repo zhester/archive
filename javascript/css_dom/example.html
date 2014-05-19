@@ -1,0 +1,104 @@
+<style type="text/css">
+#example div, #example p, #example ul, #example li {
+	margin: 0.5em 2em;
+	padding: 0.5em 2em;
+}
+#example ul {
+	list-style: none;
+}
+#example li {
+	border-bottom: solid 1px #DDDDDD;
+}
+.divsA {
+	color: inherit;
+	background-color: #F8F8F8;
+}
+.divsB {
+	color: inherit;
+	background-color: #FFFFEE;
+}
+.psA {
+	color: inherit;
+	background-color: #EEEEEE;
+}
+.psB {
+	color: inherit;
+	background-color: #FFFFCC;
+}
+.psA, .psB, .psC {
+	border: solid 1px #CCCCCC;
+}
+</style>
+
+<script type="text/javascript">
+var cd = null;
+function apply_style() {
+	cd.applyStyle(
+		document.getElementById('selector').value,
+		document.getElementById('property').value,
+		document.getElementById('value').value,
+		document.getElementById('inclusive').checked
+	);
+}
+function remove_style() {
+	cd.removeStyle(document.getElementById('selector').value);
+}
+window.addEventListener(
+	'load', function(e) {
+		for(var i in document.styleSheets) {
+			if(document.styleSheets[i].href == null) {
+				cd = document.styleSheets[i];
+				break;
+			}
+		}
+	}, false
+);
+</script>
+
+<div>
+	<p>
+		Selector: <input type="text" id="selector" value=".divsA"/>&nbsp;
+		Rule: <input type="text" id="property" value="color"/>&nbsp;
+		Value: <input type="text" id="value" value="red"/>&nbsp;
+		Inclusive: <input type="checkbox" id="inclusive"/>
+	</p>
+	<p>
+		<input type="button" value="Apply Style" onclick="apply_style();"/>
+		<input type="button" value="Remove Style" onclick="remove_style();"/>
+	</p>
+</div>
+
+<div id="example">
+
+<div id="div0" class="divsA">
+	<p class="psA">This is a paragraph. #div0.divsA>.psA</p>
+	<p class="psA">This is a paragraph. #div0.divsA>.psA</p>
+	<p class="psA">This is a paragraph. #div0.divsA>.psA</p>
+</div>
+
+<div id="div1" class="divsA">
+	<p class="psB">This is a paragraph. #div1.divsA>.psB</p>
+	<p class="psA">This is a paragraph. #div1.divsA>.psA</p>
+	<p class="psB">This is a paragraph. #div1.divsA>.psB</p>
+</div>
+
+<div id="div2" class="divsB">
+	<p class="psA">This is a paragraph. #div2.divsB>.psA</p>
+	<p class="psB">This is a paragraph. #div2.divsB>.psB</p>
+	<p class="psA">This is a paragraph. #div2.divsB>.psA</p>
+</div>
+
+<div id="div3" class="divsB">
+	<p class="psB">This is a paragraph. #div3.divsB>.psB</p>
+	<p class="psB">This is a paragraph. #div3.divsB>.psB</p>
+	<p class="psB">This is a paragraph. #div3.divsB>.psB</p>
+</div>
+
+<div id="div4" class="divsC">
+	<p class="psC">This is a paragraph. #div4.divsC>.psC</p>
+	<p class="psC">This is a paragraph. #div4.divsC>.psC</p>
+	<p class="psC">This is a paragraph. #div4.divsC>.psC</p>
+</div>
+
+</div>
+

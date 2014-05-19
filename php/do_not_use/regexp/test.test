@@ -1,0 +1,34 @@
+
+<script type="text/javascript" src="/flat/javascript/http_client.js"></script>
+<script type="text/javascript" src="/flat/javascript/asynch_submit.js"></script>
+<script type="text/javascript">
+function asub() {
+	document.getElementById('btn').disabled = true;
+	document.getElementById('results').value = '';
+	asynch_submit(
+		'regexp',
+		function(response) {
+			document.getElementById('btn').disabled = false;
+			document.getElementById('results').value = response;
+		}
+	);
+}
+</script>
+<form action="/flat/regexp/test.php" method="get" id="regexp"
+	onsubmit="return(false);">
+	<p>
+		Source Text<br />
+		<textarea name="source" cols="60" rows="4"></textarea>
+	</p>
+	<p>
+		Regular Expression<br />
+		<input type="text" name="regexp" size="60" />
+	</p>
+	<p>
+		<input type="button" value="PHP Test" id="btn" onclick="asub();" />
+	</p>
+	<p>
+		Results -- #&gt;&gt; is the match element<br />
+		<textarea id="results" cols="60" rows="4"></textarea>
+	</p>
+</form>

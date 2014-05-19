@@ -1,0 +1,11 @@
+body {
+	margin: 0; padding: 2px; font-family: Arial, sans-serif;
+	color: #000000; background-color: #FFFFFF;
+}
+table.user {
+	border: solid 1px #000000;
+}
+
+body.markup {
+	font-family: 'Courier New', Courier, monospace;
+}

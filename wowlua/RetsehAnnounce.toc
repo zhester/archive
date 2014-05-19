@@ -1,0 +1,12 @@
+## Interface: 30000
+## Title: RetsehAnnounce
+## Notes: Retseh's Custom Announcements
+## Author: Retseh
+## Version: 0.0
+
+# Entirely custom mod for my own purposes.
+# A lot of my inspiration was taken from the old MDHLP mod.
+# Nothing is saved in user states.
+
+RetsehAnnounce.xml
+RetsehAnnounce.lua

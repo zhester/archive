@@ -1,0 +1,25 @@
+
+<script type="text/javascript" src="../http_client/http_client.js"></script>
+<script type="text/javascript">
+function get_response(response) {
+	alert(response);
+	document.getElementById('asubmit').disabled = false;
+}
+function make_request() {
+	document.getElementById('asubmit').disabled = true;
+	asynch_submit('form_id', get_response);
+}
+</script>
+<form action="asynch_submit.php" method="post" id="form_id">
+	<p>
+		<input type="text" name="field_1" value="test field 1" />
+	</p>
+	<p>
+		<textarea name="field_2">test
+field 2</textarea>
+	</p>
+	<p>
+		<input type="button" value="Quick Save Form"
+			id="asubmit" onclick="make_request();" />
+	</p>
+</form>

@@ -1,0 +1,33 @@
+
+<script type="text/javascript">
+var dt = new Date();
+function test_client() {
+	try {
+		var http = new http_client();
+		http.get(
+			'http_client.php?nocache='+dt.getTime(),
+			function(text) {
+				alert(text);
+			}
+		);
+	}
+	catch(e) {
+		alert(e);
+	}
+}
+function test_timeout(delay) {
+	var http = new http_client(delay);
+	http.get(
+		'http_client.php?timeout=4000&nocache='+dt.getTime(),
+		function(text) {
+			alert(text);
+		},
+		function() {
+			alert('Request timed out.');
+		}
+	);
+}
+</script>
+<input type="button" value="Test Client" onclick="test_client();" />
+<input type="button" value="Test Timeout" onclick="test_timeout(2000);" />
+<input type="button" value="Test Timeout" onclick="test_timeout(8000);" />

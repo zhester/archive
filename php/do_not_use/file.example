@@ -1,0 +1,70 @@
+<?php
+
+$f = array();
+$f[] = new FilePath();
+$f[] = new FilePath(__FILE__);
+$f[] = new FilePath('flat/php/file.html');
+$f[] = new FilePath('flat/php');
+$f[] = new FilePath('file.html', __FILE__);
+
+echo '<dl>';
+
+foreach($f as $fob) {
+	echo '<dt>', $fob->getPath(), '</dt><dd>', $fob->getPathURI(), '</dd>';
+}
+
+$f[0]->setPathURI('/flat/php/file.html');
+echo '<dt>', $f[0]->getPath(), '</dt><dd>', $f[0]->getPathURI(), '</dd>';
+
+$f[0]->setPathURI('http://code.zacharyhester.com/flat/php/file.html');
+echo '<dt>', $f[0]->getPath(), '</dt><dd>', $f[0]->getPathURI(), '</dd>';
+
+$f[0]->setPathURI('/index.php');
+echo '<dt>', $f[0]->getPath(), '</dt><dd>', $f[0]->getPathURI(), '</dd>';
+
+$f[0]->setPathURI('/');
+echo '<dt>', $f[0]->getPath(), '</dt><dd>', $f[0]->getPathURI(), '</dd>';
+
+echo '</dl>';
+
+$f = new FilePath('/webusr/zacharyhester/code/flat/php/file.html');
+
+?>
+<table>
+	<tr>
+		<th>getPath</th>
+		<td><?php echo $f->getPath(); ?></td>
+	</tr>
+	<tr>
+		<th>getPathURI</th>
+		<td><?php echo $f->getPathURI(); ?></td>
+	</tr>
+	<tr>
+		<th>getPathFullURI</th>
+		<td><?php echo $f->getPathFullURI(); ?></td>
+	</tr>
+	<tr>
+		<th>fileExists</th>
+		<td><?php echo $f->fileExists(); ?></td>
+	</tr>
+	<tr>
+		<th>isFile</th>
+		<td><?php echo $f->isFile(); ?></td>
+	</tr>
+	<tr>
+		<th>isDirectory</th>
+		<td><?php echo $f->isDirectory(); ?></td>
+	</tr>
+	<tr>
+		<th>getMime</th>
+		<td><?php echo $f->getMime(); ?></td>
+	</tr>
+	<tr>
+		<th>getSize</th>
+		<td><?php echo $f->getSize(); ?></td>
+	</tr>
+	<tr>
+		<th>getModifiedTime</th>
+		<td><?php echo $f->getModifiedTime(); ?></td>
+	</tr>
+</table>

@@ -1,0 +1,102 @@
+<h1>Pure CSS Dynamic Menu</h1>
+
+<p>
+	The pure CSS dynamic menu has been a legend among web developers.
+	With the new CSS3 selectors, it is now possible to accomplish this.
+	Since Firefox (Gecko) and Safari 1.3 (KHTML) now support many of
+	the CSS3 selectors, we now have something that will work on many
+	web browsers and still play nicely when we have to throw a pile of
+	JavaScript at Microsoft to help their browser along (hopefully,
+	IE7 will fix that for us).
+</p>
+<p>
+	First, it's important to understand a large requirement I have for
+	web documents: it must <em>only</em> represent the information.
+	I don't want this to represent layout, styles, design, or anything
+	related to how the information looks.  Therefore, using complex
+	markup (such as tables) is not acceptable.  Also, using markup
+	that doesn't represent the informational quality of the document
+	(like divs and spans without content markup) is also unacceptable.
+</p>
+
+<p>
+	So, without further introduction, here is the document structure
+	for our dynamic menu:
+</p>
+
+<?php display_code('.example'); ?>
+
+<p>
+	Of course, all the crazy whitespace is here for illustration purposes.
+	I would condense this to far fewer lines in production.  I just wanted
+	to represent the structure of the document very clearly.  Notice that
+	it's composed entirely of three elements: list containers, list items,
+	and anchor tags.  There aren't any strange divs or spans trying to
+	similulate things that don't belong here.  There aren't any classes
+	on any element (we will be referencing the root of the menu through
+	its ID).  We also have multiple levels of structure or "tiers."  All
+	of the information <em>and</em> menu structure is represented in this
+	simple document fragment.
+</p>
+<p>
+	And, here is a working example of this menu in action:
+</p>
+
+<?php deliver_code('.example'); ?>
+
+
+<h2>Style Sheet</h2>
+<p>
+	Finally, here is the style sheet that drives the menu:
+</p>
+
+<?php display_code('.css'); ?>
+
+
+<h2>Some Notes</h2>
+<p>
+	First, it's important to see how we position submenus.  I don't mind
+	a little inprecision in placing the submenus since it means the
+	menus will adjust their positions based on the current font sizes.
+	If you require laser-precise positioning and you know your font sizes,
+	it's quite safe to use pixels instead of ems to position your submenus.
+</p>
+<p>
+	Along those lines, this stylesheet can be easily adapted for a
+	row of "tab-style" menus that drop down into the first-generation
+	submenus.  Then, second- through nth-generation submenus can revert
+	to flying out to the right.
+</p>
+<p>
+	The CSS3 "nth-last-child" pseudo-element has the fantastic ability to
+	select elements from the end of a list of elements.  Therefore, if you
+	are building a tab-style menu and you want the last two or three tabs
+	to send their flyouts to the left instead of the right, you can specify
+	selectors similar to this:
+</p>
+<pre>
+ul#menu li:nth-last-child(-n+2) ul {
+	/* position the ul to align to the right edge */
+}
+ul#menu li:nth-last-child(-n+2) ul li ul {
+	/* position the ul to fly to the left */
+}
+</pre>
+<p>
+	It's also possible to add a rim of dead space around each submenu to
+	provide a "sticky" region.  A sticky region is a small area around
+	each submenu where a user can move their mouse cursor and the menu
+	won't fold back up.  Generally, a sticky region is easy to implement
+	by just playing around with padding and margins.
+</p>
+
+<h2>Future Plans</h2>
+<p>
+	I hope to provide a style sheet that uses all the tricks mentioned
+	in the notes section.
+</p>
+<p>
+	I also want to build a JavaScript that can be used in conjunction with
+	this document fragment and style sheet to make the menu work in a
+	majority of web browsers.
+</p>

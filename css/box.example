@@ -1,0 +1,41 @@
+<div class="box1" id="box">
+	<h4>Box Title</h4>
+	<div>
+		<p>
+			Lorem ipsum dolor sit amet consectetuer adipiscing Cras Ut
+			Sed Curabitur. Lacinia ac lobortis semper sapien at urna eu
+			Integer id Nulla. Volutpat nec wisi auctor a orci sagittis
+			vitae ac Donec tempor. Venenatis tellus convallis In nec
+			massa nibh pellentesque ac lacus at. Libero pede aliquam
+			lobortis lacus nibh Sed Vestibulum justo et et. Lacinia
+			cursus elit est tempus sociis tincidunt.
+		</p>
+		<p>
+			Vitae id Aenean libero Quisque tellus odio Vestibulum leo Morbi
+			et. Laoreet nibh vitae Cum hac orci eleifend nunc a massa elit.
+			Pretium condimentum libero ligula eu Pellentesque malesuada
+			mollis volutpat pellentesque vitae. Sed elit sapien facilisis
+			Lorem felis at pretium In elit Vestibulum. Massa est orci elit
+			justo enim Vestibulum vel nunc tortor sit. Morbi dapibus gravida
+			volutpat Vestibulum.
+		</p>
+	</div>
+</div>
+<!--
+	The following drives a style selection interface for
+	demonstration purposes only.
+-->
+<script type="text/javascript">
+function setBox() {
+	var box = document.getElementById('box');
+	var sel = document.getElementById('sel');
+	box.className = sel.options[sel.selectedIndex].value;
+}
+</script>
+<p>
+	Select Style:
+	<select id="sel" onchange="setBox();">
+		<option value="box1">box1</option>
+		<option value="box">box</option>
+	</select>
+</p>

@@ -1,0 +1,67 @@
+<h1>Data Plotter</h1>
+
+<p>
+	Most math packages and charting programs these days can generate 3D
+	charts, but the capabilities and control over those charts is generally
+	very limited.  This script is my very first attempt at building a
+	plugin for Blender to facilitate a mesh generation system to render
+	3D charts.
+</p>
+
+
+<h2>An Example</h2>
+
+<p>
+	Let's say I have some data for some important purpose.  I've exported
+	it from my preferred data/math package to a neutral CSV format:
+</p>
+
+<?php display_code('.csv'); ?>
+
+<p>
+	The Blender plugin loads the CSV data directly from the file, and
+	charts this information as a field of bars (currently, the only
+	chart type available).  Each series sits in its own row down the
+	X axis.  The series are separated from each other down the Y axis.
+</p>
+<p>
+	In the below image, the first series (the first column in the CSV file)
+	is positioned closer to the camera.  The second series is further from
+	the camera.  The values are displayed in order from left to right
+	(top to bottom in the CSV file).
+</p>
+
+<p><img src="/flat/blender/dataplot.jpg" alt="3D Bar Chart" /></p>
+
+
+<h2>Another Example</h2>
+
+<p>
+	The previous example is just a plain bar chart without any materials
+	on the default background.  Here is one of the charts I've produced
+	with this script with a little more polish:
+</p>
+<p><img src="/flat/blender/dataplot.png" alt="Fancy 3D Bar Chart" /></p>
+
+
+<h2>Future Development</h2>
+
+<p>
+	I am trying to add support for pie charts and other chart types
+	(just about anything that looks good illustrated in three dimensions).
+	Once I have broadened the capabilities, I'm going to revise the UI,
+	and add as much customization to the mesh generation options as I deem
+	necessary.
+</p>
+
+
+<h2>The Code</h2>
+
+<p>
+	The script is written as a Blender plugin script, but it has not been
+	tested as a plugin yet (I just have the script loaded into the script
+	editor in Blender).  I will post more updates here as I can.
+</p>
+
+<?php display_code('.py'); ?>
+

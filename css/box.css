@@ -1,0 +1,99 @@
+/*
+ * This box is an edge-styled rounded box.
+ * Advantages:
+ *   - Limited stretchiness (Y is unlimited, X is bound by graphic size)
+ *   - Box's background is set by CSS (not the graphics).
+ *   - Edges are styled along all four sides making it possible to
+ *     bevel/emboss/shadow/whatever the box above its surroundings.
+ * Disadvantages:
+ *   - Contents are offset into the box by a minimum of the
+ *     of the graphic dimensions.
+ *   - Exterior background must be white withour patterns.
+ *   - The horizontal edges need moderately large images to provide
+ *     horizontal flexibility without tiling.
+ */
+.box1 {
+	max-width: 1200px;
+	background-image: url(box/box1_round_03.png);
+	background-position: left top;
+	background-repeat: repeat-y;
+	background-color: #EEFFEE;
+}
+.box1:before {
+	display: block;
+	height: 20px;
+	content: url(box/box1_round_02.png);
+	text-align: right;
+	background-image: url(box/box1_round_01.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-color: #DDDDDD;
+}
+.box1:after {
+	display: block;
+	height: 20px;
+	content: url(box/box1_round_09.png);
+	text-align: right;
+	background-image: url(box/box1_round_08.png);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+	background-color: #EEFFEE;
+}
+.box1 h4, .box1 div {
+	margin: 0; padding: 1px 0;
+	background-image: url(box/box1_round_05.png);
+	background-position: right top;
+	background-repeat: repeat-y;
+	background-color: transparent;
+}
+.box1 h4 {
+	margin-left: 10px;
+	padding: 0 10px 10px 20px;
+	background-color: #DDDDDD;
+}
+.box1 div {
+	padding: 1px 30px;
+}
+
+/*
+ * This box is a basic "four-corners" rounded box.
+ * Advantages:
+ *   - Unlimited stretchiness (in both directions)
+ *   - Small graphics
+ *   - Box's background is set by CSS (not the graphics).
+ * Disadvantages:
+ *   - No graphics can be tiled along the edges of the box.
+ *   - Contents are offset into the box by a minimum of the
+ *     of the graphic dimensions.
+ *   - Exterior background must be white without patterns. 
+ */
+.box:before {
+	display: block;
+	height: 20px;
+	content: url(box/box_topleft.png);
+	background-image: url(box/box_topright.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+	background-color: #FF9900;
+}
+.box:after {
+	display: block;
+	height: 20px;
+	content: url(box/box_bottomleft.png);
+	background-image: url(box/box_bottomright.png);
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	background-color: #EEEEEE;
+}
+.box h4 {
+	margin: 0;
+	padding: 0 20px 10px 20px;
+	background-color: #FF9900;
+	font-size: 160%;
+	font-variant: small-caps; 
+}
+.box div {
+	margin: 0;
+	padding: 1px 20px;
+	background-color: #EEEEEE;
+}

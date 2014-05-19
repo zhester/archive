@@ -1,0 +1,73 @@
+/**
+ * Dynamic Menu Style Sheet
+ * Zac Hester - 2006-03-29
+ *
+ * Caution: This style sheet uses CSS3 selectors and CSS2 selectors that
+ *   IE6- never implemented.  It is not suitable for a production web site
+ *   unless reinforced by JavaScript to accomodate for the older browsers.
+ */
+
+ul#menu {
+	width: 12em;
+	margin: 2em 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul#menu li {
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * The anchors are blocks here mostly for styling purposes and to
+ * make the hand pointer display when the underlying li is hovered.
+ */
+ul#menu li a {
+	display: block;
+	margin: 0;
+	padding: 3px 24px 3px 5px;
+	border: solid 1px #CCCCCC;
+	background-image: url(menu.png);
+	background-position: 98% 50%;
+	background-repeat: no-repeat;
+	background-color: #EEEEFF;
+	text-decoration: none;
+}
+
+ul#menu li a:hover {
+	background-color: #FFFFFF;
+}
+
+/*
+ * Note that all the anchors have backgrounds, at first.  This rule will
+ * remove backgrounds from anchors if they aren't accompanied by a sibling
+ * element.
+ */ 
+ul#menu li a:only-child {
+	background-image: none;
+}
+
+/*
+ * This selector establishes where submenus will appear.
+ */
+ul#menu li ul {
+	display: none;
+	position: absolute;
+	left: auto;
+	top: auto;
+	width: 12em;
+	margin: 0;
+	margin-left: 11.5em;
+	margin-top: -1.8em;
+	padding: 0;
+	list-style: none;
+}
+
+/*
+ * Because of our very simple document structure, this one rule is able
+ * to display all of the submenus.
+ */
+ul#menu li:hover > ul {
+	display: block;
+}

@@ -1,0 +1,92 @@
+<h1>Asynchronous Form Submission</h1>
+
+<h2>Problem</h2>
+<p>
+	I developed this bit of JavaScript to allow me to create a
+	user-friendly way to send form data to the server without taking
+	the user from their current page.  This way, a user can work on
+	a large document and make periodic "saves" without breaking
+	workflow.
+</p>
+
+<h2>Requirements</h2>
+<p>
+	As with most general-purpose JavaScript, I had to find a balance
+	between ease of programming and flexibility.  I arrived at a very
+	simple model to handle the asynchronous nature of "behind the scenes"
+	HTTP requests:
+</p>
+<pre>
+interface_function(
+    <em>mixed</em> context_parameter,
+    <em>function</em> response_handler
+);
+</pre>
+<p>
+	Based on the application, the context parameter and the response
+	handler may be used or controlled differently.  For instance, the
+	context parameter may be an ID for DOM reference or a DOM node
+	itself.  Another example is that a response handler may be passed
+	either plain text, an array, or an XML DOM node from the response
+	of the HTTP request.
+</p>
+<p>
+	In this application, the context is a form, so the ID of the form
+	is used.  The response from the server should be a simple message
+	intended to tell the user the result of the request.  Thus, the
+	response handler should take a single parameter that's a string.
+	At that point, the handler may use a dynamic node, alert box,
+	or another form field to pass the message on to the user.
+</p>
+<h3>Submitting a Form in "Stealth Mode"</h3>
+<p>
+	One of the great things about this code is that it doesn't need any
+	special facility from the form or the form processor to operate as
+	if it were a regular form submission.  The client form can be the
+	exact same form that is used for standard submission.  The server-side
+	processor can sometimes be the same script.  The only problem is
+	that a form processor usually responds with a web page or a redirect
+	to a web page.  This means the response string will be an entire
+	page when all we want is a simple message.  That's why the submission
+	function will send a special query variable called
+	<code>asynch_submission</code> set to <code>true</code>.  This allows
+	a server-side processor to tell if the form was submitted out of
+	the usual flow and respond accordingly.  Even then, the majority of
+	a well-developed form processor should be nearly identical code
+	making it possible to use a simple <code>if</code> statement at the
+	end of the processor to either redirect or simply send the message.
+</p>
+
+<h2>Application Programming Interface</h2>
+<p>
+	Something (a user, a timer, another script, etc) has to call the
+	submission function with the ID of the form that is being submitted
+	and a reference to an event handler that will "catch" the response
+	from the server.  The handler should take one argument that will
+	contain the text.  It's up to the handler to decide how to show it
+	to the user or do something else exciting.
+</p>
+<p>
+	Example of the interface:
+</p>
+<pre>
+asynch_submit(
+    'form_id',
+    function(response) {
+        alert(response);
+    }
+);
+</pre>
+
+</p>
+	The particulars of the submissions are determined from the form
+	itself.  The action and method are read from the form's attributes
+	with reasonable defaults (as the browser would on its own).
+</p>
+<p>
+	It's important to note that the HTTP request won't always happen
+	faster than a user is aware.  The button that submits the form
+	should probably be disabled during the request to keep a user from
+	submitting it twice with a double click.  When the response handler
+	is called, the HTTP request has finished and the button can be enabled.
+</p>

@@ -1,0 +1,33 @@
+
+<script type="text/javascript">
+function set_stylesheet(sheet_title) {
+	var sss = document.getElementsByTagName('link');
+	var linktitle = '';
+	for(var i = 0; i < sss.length; ++i) {
+		linktitle = sss[i].getAttribute('title');
+		if(linktitle && linktitle.length) {
+			if(linktitle == sheet_title) {
+				sss[i].disabled = false;
+			}
+			else if((linktitle.toLowerCase() != 'base')
+				|| (sheet_title == '')) {
+				sss[i].disabled = true;
+			}
+		}
+	}
+}
+</script>
+
+<link rel="alternate stylesheet" type="text/css" title="Style 1"
+	href="style1.css" />
+<link rel="alternate stylesheet" type="text/css" title="Style 2"
+	href="style2.css" />
+
+<ul>
+	<li><a href="#" onclick="set_stylesheet('Style 1');
+		return(false);">SS 1</a></li>
+	<li><a href="#" onclick="set_stylesheet('Style 2');
+		return(false);">SS 2</a></li>
+	<li><a href="#" onclick="set_stylesheet('');
+		return(false);">Deactivate Alternates</a></li>
+</ul>

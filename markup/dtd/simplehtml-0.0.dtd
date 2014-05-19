@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---------------------------------------------------------------------------
+	Simple HTML - XML Document Type Definition
+	Zac Hester <zac@zacharyhester.com> - 2005-07-26
+
+	The purpose of this DTD is to define the boundaries of very simple,
+	content-only HTML documents.  This provides a middle ground for all
+	types of user agents to parse, process, and store basic content.
+	The document is simple enough to allow simple, stream-based parsers
+	to operate on the data, but provides the necessary elements for direct
+	rendering in a standard, graphical web browser.
+---------------------------------------------------------------------------->
+
+<!-- Root element satisfies XML specs and doesn't disturb HTML UAs. -->
+<!ELEMENT div (h1,h2,h3,h4,h5,h6,p,blockquote,ul,ol,pre)*>
+<!ATTLIST div id CDATA>
+<!ATTLIST div class CDATA>
+
+<!-- Block Level Elements -->
+<!ELEMENT h1 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT h2 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT h3 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT h4 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT h5 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT h6 (a,strong,em,span,br,#PCDATA)*>
+<!ELEMENT p (a,strong,em,span,br,img,#PCDATA)*>
+<!ELEMENT ul (li+)>
+<!ELEMENT ol (li+)>
+<!ELEMENT li (a,strong,em,span,br,img,#PCDATA)*>
+<!ELEMENT pre (a,strong,em,span,br,img,#PCDATA)*>
+
+<!-- Inline Elements -->
+<!ELEMENT a (strong,em,span,img,#PCDATA)*>
+<!ELEMENT strong (#CDATA)>
+<!ELEMENT em (#CDATA)>
+<!ELEMENT span (a,strong,em,span,img,#PCDATA)*>
+<!ELEMENT img (EMPTY)>
+<!ELEMENT br (EMPTY)>
+
+<!-- Inline Element Attributes -->
+<!ATTLIST a href CDATA>
+<!ATTLIST a name CDATA>
+<!ATTLIST span class CDATA>
+<!ATTLIST img src CDATA #REQUIRED>
+<!ATTLIST img alt CDATA #REQUIRED>
+<!ATTLIST img title CDATA>
+<!ATTLIST img style CDATA>

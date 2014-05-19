@@ -1,0 +1,26 @@
+<h1>File Path Abstraction</h1>
+<p>
+	If you've ever designed an application that needs to handle
+	files from users and be able to easily adapt to new directory
+	structures, you know how challenging this can be.  Not to mention
+	this is an easy place for security holes to sneak into a large
+	application.  Besides that, applications on the web have to
+	differentiate between two contexts: the filesystem and the URI
+	path.
+</p>
+<p>
+	This class is largely inspired by banging my head against the
+	wall and one of the cool features in Java: an abstract object
+	to act as a path, but allow much more functionality, reliability,
+	intelligence, and security.
+</p>
+
+<h2>Example Usage</h2>
+<?php display_code('.example'); ?>
+
+<h2>Example Results</h2>
+<?php deliver_code('.php'); ?>
+<?php deliver_code('.example'); ?>
+
+<h2>Code Listing</h2>
+<?php display_code('.php'); ?>

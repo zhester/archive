@@ -1,0 +1,218 @@
+/* Editor Styles - Zac Hester - 2006-03-09 */
+
+div.edt_parent {
+	margin: 1em auto; padding: 0;
+	border-top: solid 1px #999999;
+	border-left: solid 1px #999999;
+	border-bottom: solid 1px #666666;
+	border-right: solid 1px #666666;
+	text-align: center;
+	color: inherit;
+	background-color: #FFFFFF;
+	background-image: url(icons/edt_bg.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+}
+div.edt_parent span {
+	display: block;
+	margin: 0; padding: 3px 7px;
+	color: #FFFFFF;
+	background-color: #CC0000;
+	background-image: url(icons/hd_bg.png);
+	background-position: right top;
+	background-repeat: repeat-y;
+	font-weight: bold;
+	text-align: left;
+}
+div.edt_parent textarea, div.edt_parent iframe {
+	width: 99%;
+	height: 120px;
+	border: solid 1px #BBBBBB;
+}
+div.edt_parent textarea {
+	display: none;
+}
+
+div.edt_ctl {
+	height: 28px;
+	margin: 0;
+	padding: 2px 4px 0 4px;
+	background-color: transparent;
+}
+div.edt_ctl a.edt_btn {
+	display: block;
+	float: left;
+	width: 24px;
+	height: 24px;
+	margin: 0 1px 0 0;
+	padding: 0;
+	font-size: 0;
+	color: #FFFFFF;
+	background-position: 50% 50%;
+	background-color: transparent;
+	background-repeat: no-repeat;
+}
+div.edt_ctl span {
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 3px 3px 0 0;
+	width: 5px;
+	color: #666666;
+	background-color: transparent;
+	background-image: none;
+	text-align: center;
+	font-size: 120%;
+	font-weight: normal;
+}
+div.edt_ctl select {
+	display: block;
+	float: left;
+	margin: 2px;
+}
+div.edt_parent div.edt_ctl_5 a.edt_btn {
+	display: inline;
+	float: none;
+	margin: 0 4px;
+	padding: 1px 3px;
+	color: #333333;
+	background-color: transparent;
+	border: solid 1px transparent;
+	text-decoration: none;
+	font-size: 100%;
+	color: #000000;
+}
+div.edt_parent div.edt_ctl_5 a.edt_btn:hover {
+	border: solid 1px #AAAAAA;
+}
+div.edt_parent div.edt_ctl a.current {
+	background-color: #FFEE77;
+}
+div.edt_parent div.edt_ctl_5 span {
+	display: inline;
+	float: none;
+	margin: 0;
+	padding: 0;
+	width: 5px;
+	color: #666666;
+	background-color: transparent;
+	background-image: none;
+	text-align: center;
+	font-size: 120%;
+}
+
+div.edt_dlg {
+	z-index: 100;
+	border: solid 1px #999999;
+	position: absolute;
+	top: 0; left: 0;
+	margin: 0;
+	display: block;
+	text-align: center;
+	background-image: url(icons/dlg_bg.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+}
+	div.edt_dlg ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		text-align: left;
+	}
+		div.edt_dlg ul li {
+			margin: 0; padding: 0;
+		}
+		div.edt_dlg ul li a {
+			display: block;
+			padding: 1px 2px;
+			border-left: solid 3px transparent;
+			border-right: solid 3px transparent;
+		}
+		div.edt_dlg ul li a:hover {
+			border-left: solid 3px #CCCCCC;
+			border-right: solid 3px #CCCCCC;
+		}
+	div.edt_dlg p {
+		margin: 6px 0 0 0;
+		padding: 1px 4px;
+		border-top: dashed 1px #CCCCCC;
+	}
+	div.edt_dlg input, div.edt_dlg span {
+		display: block;
+		width: 90%;
+		margin: 1px auto;
+	}
+	div.fontsize { width: 60px; }
+	div.fontname { width: 170px; }
+	div.formatblock { width: 120px; }
+	div.createlink { width: 260px; }
+	div.maillink { width: 260px; }
+	div.insertimage { width: 260px; }
+
+table.palette {
+	width: 200px;
+	border-collapse: collapse;
+	padding: 0;
+}
+	table.palette td {
+		margin: 0; padding: 0;
+	}
+	table.palette a {
+		display: block;
+		width: 18px;
+		border: solid 1px #FFFFFF;
+		text-decoration: none;
+	}
+	table.palette a:hover {
+		border: solid 1px #999999;
+	}
+	table.palette tr.footer td {
+		text-align: center;
+	}
+	table.palette tr.footer a {
+		display: inline;
+		border: none;
+	}
+
+div.generic {
+	width: 200px;
+	height: 300px;
+	padding: 4px;
+	overflow: scroll;
+}
+	div.generic p {
+		margin: 0.5em 0; padding: 0;
+		text-align: center;
+	}
+
+div.edt_ctl a.edt_bold { background-image: url(icons/bold.png); }
+div.edt_ctl a.edt_italic { background-image: url(icons/italic.png); }
+div.edt_ctl a.edt_underline { background-image: url(icons/underline.png); }
+div.edt_ctl a.edt_forecolor { background-image: url(icons/forecolor.png); }
+div.edt_ctl a.edt_hilitecolor { background-image: url(icons/hilitecolor.png); }
+div.edt_ctl a.edt_justifyleft { background-image: url(icons/justifyleft.png); }
+div.edt_ctl a.edt_justifycenter { background-image: url(icons/justifycenter.png); }
+div.edt_ctl a.edt_justifyright { background-image: url(icons/justifyright.png); }
+div.edt_ctl a.edt_justifyfull { background-image: url(icons/justifyfull.png); }
+div.edt_ctl a.edt_inserthorizontalrule { background-image: url(icons/inserthorizontalrule.png); }
+div.edt_ctl a.edt_insertorderedlist { background-image: url(icons/insertorderedlist.png); }
+div.edt_ctl a.edt_insertunorderedlist { background-image: url(icons/insertunorderedlist.png); }
+div.edt_ctl a.edt_indent { background-image: url(icons/indent.png); }
+div.edt_ctl a.edt_outdent { background-image: url(icons/outdent.png); }
+div.edt_ctl a.edt_undo { background-image: url(icons/undo.png); }
+div.edt_ctl a.edt_redo { background-image: url(icons/redo.png); }
+div.edt_ctl a.edt_selectall { background-image: url(icons/selectall.png); }
+div.edt_ctl a.edt_unselect { background-image: url(icons/unselect.png); }
+div.edt_ctl a.edt_createlink { background-image: url(icons/createlink.png); }
+div.edt_ctl a.edt_maillink { background-image: url(icons/maillink.png); }
+div.edt_ctl a.edt_insertimage { background-image: url(icons/insertimage.png); }
+div.edt_ctl a.edt_inserttable { background-image: url(icons/inserttable.png); }
+div.edt_ctl a.edt_formatblock { background-image: url(icons/formatblock.png); }
+div.edt_ctl a.edt_fontname { background-image: url(icons/fontname.png); }
+div.edt_ctl a.edt_fontsize { background-image: url(icons/fontsize.png); }
+div.edt_ctl a.edt_browseimage { background-image: url(icons/browseimage.png); }
+div.edt_ctl a.edt_browselink { background-image: url(icons/browselink.png); }
+div.edt_ctl a.edt_formatblock { background-image: url(icons/formatblock.png); }
+div.edt_ctl a.edt_fontname { background-image: url(icons/fontname.png); }
+div.edt_ctl a.edt_fontsize { background-image: url(icons/fontsize.png); }

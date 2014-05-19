@@ -1,0 +1,32 @@
+<?php
+
+$doc = array(
+	'key0' => array(
+		'elem0', 'elem1', 'elem2'
+	),
+	'key1' => array(
+		'key1a' => 'hello',
+		'key1b' => 'world'
+	),
+	'key2' => 'test',
+	'key3' => array(
+		'key3a' => array(
+			'key3a1' => array(
+				'value3a1a', 'value3a1b'
+			),
+			'key3a2' => array(
+				'key3a2a' => 'value3a2a'
+			),
+			'key3a3' => 'value3a3'			
+		)
+	),
+	'key4' => array(
+		5, 4.56, true, '32', 'hello',
+		"A line\nAnother line\nA third line",
+		"Field1\tField2\tField3", "\r\n\t\"\\"
+	)
+);
+
+echo htmlspecialchars(json_get_string($doc));
+
+?>
