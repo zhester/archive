@@ -1,0 +1,1103 @@
+
+
+<script type="text/javascript">
+function page_tab(source) {
+	var params = source.hash.split(/:/);
+	var target = document.getElementById(params[1]);
+	if(target) {
+		var ul = source.parentNode;
+		while(ul.tagName != 'UL') {
+			ul = ul.parentNode;
+		}
+		var as = ul.getElementsByTagName('a');
+		for(var i = 0; i < as.length; ++i) {
+			as[i].className = '';
+		}
+		source.className = 'selected';
+		var divs = target.childNodes;
+		var cdiv = 0;
+		for(var i = 0; i < divs.length; ++i) {
+			if(divs[i].tagName == 'DIV') {
+				if(parseInt(params[2]) == cdiv) {
+					divs[i].style.display = 'block';
+				}
+				else {
+					divs[i].style.display = 'none';
+				}
+				++cdiv;
+			}
+		}
+	}
+	return(false);
+}
+</script>
+
+<div class="news_section">
+	<div class="tabs">
+		<ul class="tab_menu">
+			<li><a href="#tab:section_a:0" onclick="return(page_tab(this));" class="selected">BREAKING NEWS</a></li>
+			<li><a href="#tab:section_a:1" onclick="return(page_tab(this));">Most Read</a></li>
+			<li><a href="#tab:section_a:2" onclick="return(page_tab(this));">Most Commented</a></li>
+		</ul>
+		<div id="section_a">
+			<div class="tab_item_selected">
+				<ul class="breaking">
+					<li>[story_component:news/top:1:timestamp] | <a href="[story_component:news/top:1:story-uri]">[story_component:news/top:1:headline]</a></li>
+					<li>[story_component:news/top:2:timestamp] | <a href="[story_component:news/top:2:story-uri]">[story_component:news/top:2:headline]</a></li>
+					<li>[story_component:news/top:3:timestamp] | <a href="[story_component:news/top:3:story-uri]">[story_component:news/top:3:headline]</a></li>
+					<li>[story_component:news/top:4:timestamp] | <a href="[story_component:news/top:4:story-uri]">[story_component:news/top:4:headline]</a></li>
+					<li>[story_component:news/top:5:timestamp] | <a href="[story_component:news/top:5:story-uri]">[story_component:news/top:5:headline]</a></li>
+					<li>[story_component:news/top:6:timestamp] | <a href="[story_component:news/top:6:story-uri]">[story_component:news/top:6:headline]</a></li>
+					<li>[story_component:news/top:7:timestamp] | <a href="[story_component:news/top:7:story-uri]">[story_component:news/top:7:headline]</a></li>
+					<li>[story_component:news/top:8:timestamp] | <a href="[story_component:news/top:8:story-uri]">[story_component:news/top:8:headline]</a></li>
+					<li>[story_component:news/top:9:timestamp] | <a href="[story_component:news/top:9:story-uri]">[story_component:news/top:9:headline]</a></li>
+				</ul>
+				<div>hello</div>
+			</div>
+			<div class="tab_item">[mostpopular:articles:9]</div>
+			<div class="tab_item">[topblogs:9:14]</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div#scroller {
+}
+	div#scroller table.frame {
+		border-collapse: collapse;
+	}
+		div#scroller table.frame td {
+			margin: 0;
+			padding: 0;
+		}
+		* html div#scroller table.frame td {
+		}		
+			div#scroller table.frame td.previous a {
+				display: block;
+				width: 21px;
+				height: 165px;
+				margin: 0;
+				padding: 0;
+				color: inherit;
+				background-color: #FFFFFF;
+				background-position: 0 0;
+				background-repeat: no-repeat;
+				background-image: url(/_skins/200710/graphics/scroller.png);
+			}
+			div#scroller table.frame td.next a {
+				display: block;
+				width: 21px;
+				height: 165px;
+				margin: 0;
+				padding: 0;
+				color: inherit;
+				background-color: #FFFFFF;
+				background-position: -21px 0;
+				background-repeat: no-repeat;
+				background-image: url(/_skins/200710/graphics/scroller.png);
+			}
+			div#scroller table.frame td.previous a.inactive {
+				background-position: 0 -235px;
+			}
+			div#scroller table.frame td.next a.inactive {
+				background-position: -21px -235px;
+			}
+				div#scroller table.frame td a span {
+					display: none;
+				}
+			div#scroller table.frame td div#scroller_content {
+				height: 161px;
+				border: solid 2px #6D83AB;
+			}
+	div#scroller table#scroller_content_parent {
+		border-collapse: collapse;
+	}
+		div#scroller table#scroller_content_parent td {
+			width: 133px;
+			height: 160px;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			vertical-align: top;
+			border: solid 1px #88AACC;
+		}
+			div#scroller table#scroller_content_parent td p.thumbnail {
+				margin: 0;
+				padding: 0;
+				color: inherit;
+				background-color: #BBCCEE;
+			}
+			div#scroller table#scroller_content_parent td h3 {
+				margin: 0;
+				padding: 0 3px 1px 3px;
+				color: inherit;
+				background-color: #BBCCEE;
+				font-size: 100%;
+			}
+				div#scroller table#scroller_content_parent td h3 a {
+					color: #333333;
+					background-color: transparent;
+					text-decoration: none;
+				}
+			div#scroller table#scroller_content_parent td p.cutline {
+				margin: 0;
+				padding: 2px 3px;
+			}
+</style>
+
+<script type="text/javascript">
+
+/**
+ * Scroller
+ * Scrolling news handling class.
+ * 
+ * @author Zac Hester
+ * @date 2007-09-21 
+ *
+ * @param target_element The DOM element or ID where the scroller will be
+ *		placed.
+ * @param data A loose data object of a specific format that includes
+ *		entries for each item within the scroller.
+ * @param item_width Specifies the total width of individual items (should
+ *		coincide with style sheet and image specifications).
+ * @param num_visible Specifies how many items are visible without scrolling.
+ */
+function Scroller(target_element, data) {
+
+	//Core properties.
+	this.data = data;
+	this.item_width = arguments[2] ? arguments[2] : 140;
+	this.num_visible = arguments[3] ? arguments[3] : 4;
+
+	//Animation tweaks.
+	this.total_frames = 20;
+	this.frame_delay = 75;
+
+	//Reference handlers.
+	this.user_element = null;
+	this.content_element = null;
+	this.parent_element = null;
+	this.id = null;
+
+	//Tracks which item in the list is the leftmost item.
+	this.current_item = 0;
+
+	//Animation variables.
+	this.next_item = 0;
+	this.current_x = 0;
+	this.next_x = 0;
+	this.displacements = [];
+	this.unity_scaler = 0;
+	this.current_frame = 0;
+	this.anim_int = null;
+
+	//Utility.
+	this.isIE = (navigator.userAgent.indexOf('MSIE')!=-1) ? true : false;
+
+
+	/**
+	 * init
+	 * Constructor (kinda).
+	 */
+	this.init = function() {
+
+		//Private stuff.
+		var frame, tbody, tr, td, a, p, h3, div;
+
+		//Initialization.
+		if(typeof(target_element) == 'object') {
+			this.user_element = target_element;
+		}
+		else if(typeof(target_element) == 'string') {
+			this.user_element = document.getElementById(target_element);
+		}
+		else {
+			throw('Invalid target element specifcation for Scroller().');
+		}
+		this.id = this.user_element.id;
+
+		//Build the basic framework.
+		frame = document.createElement('table');
+		frame.className = 'frame';
+		tbody = document.createElement('tbody');
+		tr = document.createElement('tr');
+		td = document.createElement('td');
+		td.className = 'previous';
+		a = document.createElement('a');
+		a.id = this.id+'_nav_previous';
+		a.className = 'inactive';
+		a.innerHTML = '<span>&lt;</span>';
+		td.appendChild(a);
+		tr.appendChild(td);
+		td = document.createElement('td');
+		td.className = this.id+'_center';
+		div = document.createElement('div');
+		div.id = this.id+'_content';
+		div.style.width = (this.num_visible * this.item_width)+'px';
+		div.style.overflow = 'hidden';
+		//MSIE needs this to actually use "overflow: hidden" properly.
+		div.style.position = 'relative';
+		td.appendChild(div);
+		tr.appendChild(td);
+		td = document.createElement('td');
+		td.className = 'next';
+		a = document.createElement('a');
+		a.id = this.id+'_nav_next';
+		a.className = 'inactive';
+		a.innerHTML = '<span>&gt;</span>';
+		td.appendChild(a);
+		tr.appendChild(td);
+		tbody.appendChild(tr);
+		frame.appendChild(tbody);
+		this.user_element.appendChild(frame);
+
+		//Build the content table.
+		this.parent_element = document.createElement('table');
+		this.parent_element.id = this.id+'_content_parent';
+		this.parent_element.style.position = 'relative';
+		tbody = document.createElement('tbody');
+		tr = document.createElement('tr');
+		for(var i = 0; i < this.data.length; ++i) {
+			td = document.createElement('td');
+			td.style.width = this.item_width;
+			td.style.overflow = 'hidden';
+			p = document.createElement('p');
+			p.className = 'thumbnail';
+			p.innerHTML = '<a href="'+this.data[i]['uri']
+				+'"><img src="'+this.data[i]['thumbnail_uri']
+				+'" alt="'+this.data[i]['headline']
+				+'" title="'+this.data[i]['headline']+'" /></a>';
+			td.appendChild(p);
+			h3 = document.createElement('h3');
+			h3.innerHTML = '<a href="'+this.data[i]['uri']+'">'
+				+this.data[i]['headline']+'</a>';
+			td.appendChild(h3);
+			p = document.createElement('p');
+			p.className = 'cutline';
+			p.innerHTML = '<a href="'+this.data[i]['uri']+'">'
+				+this.data[i]['cutline']+'</a>';
+			td.appendChild(p);
+			tr.appendChild(td);
+		}
+		tbody.appendChild(tr);
+		this.parent_element.appendChild(tbody);
+
+		//Attach scrolling content to the "window" inside the frame.
+		this.content_element = document.getElementById(this.id+'_content');
+		this.content_element.appendChild(this.parent_element);
+
+		//Calculate displacement proportion factors (parabolic).
+		var midpoint = Math.round(this.total_frames / 2);
+		var max_disp = 0;
+		for(var i = 1, base = 0; i < this.total_frames; ++i) {
+
+			//Deceleration.
+			if(i > midpoint) {
+				base = i - ((i - midpoint) * 2);
+				this.displacements[i] = base * base;
+			}
+
+			//Acceleration.
+			else {
+				this.displacements[i] = i * i;
+			}
+
+			//Find the maximum proportion factor.
+			if(this.displacements[i] > max_disp) {
+				max_disp = this.displacements[i];
+			}
+		}
+
+		//Hackity-hack: smooths out the "snap" at the end of the animation.
+		this.displacements[i] = 1;
+
+		//Unity scaling coefficient.
+		this.unity_scaler = 1 / max_disp;
+
+		//Set up the control links.
+		this.setLinks(this);
+	}
+
+
+	/**
+	 * setHandleScroll
+	 * Assign scroll event handler (closure style).
+	 */
+	this.setHandleScroll = function(context) {
+
+		//Return the handler (closure).
+		return(function(evt) {
+
+			//Acquire the anchor element.
+			var cnode = null;
+			if(context.isIE) { cnode = window.event.srcElement; }
+			else { cnode = evt.target; }
+			while(cnode.tagName != 'A') { cnode = cnode.parentNode; }
+
+			//Parse request parameter.
+			var direction = cnode.hash.split(/:/)[1];
+
+			//Disable control links.
+			context.disableLinks(context);
+
+			//Figure out the next item index.
+			if(direction == 'previous') {
+				context.next_item = context.current_item - 1;
+			}
+			else {
+				context.next_item = context.current_item + 1;
+			}
+
+			//Calculate our current displacement.
+			context.current_x
+				= -1 * context.current_item * context.item_width;
+
+			//Calculate the target displacement.
+			context.next_x = -1 * context.next_item * context.item_width;
+
+			//Reset frame counter.
+			context.current_frame = 1;
+
+			//Begin animation.
+			context.anim_int = setInterval(
+				context.setHandleFrame(context),
+				context.frame_delay
+			);
+
+			//Prevent traversal.
+			return(false);
+		});
+	}
+
+
+	/**
+	 * setHandleFrame
+	 * Handles animation increments.
+	 */
+	this.setHandleFrame = function(context) {
+
+		//Return animation handler.
+		return(function() {
+
+			//Abbreviation.
+			var cf = context.current_frame;
+
+			//Check direction.
+			var direction = context.next_x > context.current_x ? 1 : -1;
+
+			//Calculate the total displacement for this frame.
+			var delta_x = 0;
+			var halfwidth = context.item_width / 2;
+			var disp = context.displacements;
+			if(cf < disp.length/2) {
+				delta_x = halfwidth * (context.unity_scaler * disp[cf]);
+			}
+			else if(cf > disp.length/2) {
+				delta_x = context.item_width - (halfwidth
+					* (context.unity_scaler * disp[cf]));
+			}
+			else {
+				delta_x = halfwidth;
+			}
+
+			//Use the delta against our direction.
+			var anim_x = context.current_x + delta_x * direction;
+
+			//Set the "left" property to the next value.
+			context.parent_element.style.left = anim_x+'px';
+
+			//Check to see if we're done moving.
+			if(cf == disp.length - 1) {
+
+				//Stop animation.
+				clearInterval(context.anim_int);
+
+				//Update item pointer.
+				context.current_item = context.next_item;
+
+				//Check control links.
+				context.setLinks(context);
+
+				//Trim out to make sure it's set correctly.
+				context.parent_element.style.left = context.next_x+'px';
+			}
+
+			//Increment frame counter.
+			++context.current_frame;
+		});
+	}
+
+
+	/**
+	 * setLinks
+	 * Based on the current item and total items, determines if "next" and
+	 * "previous" links should be interactable or not.
+	 *
+	 * @param context The object scope context.
+	 */
+	this.setLinks = function(context) {
+
+		//Abbreviations.
+		var item = context.current_item;
+		var total = context.data.length;
+		var visible = context.num_visible;
+
+		//Reference control links.
+		var al = document.getElementById(context.id+'_nav_previous');
+		var ar = document.getElementById(context.id+'_nav_next');
+
+		//Check left boundary.
+		if(item <= 0) {
+			if(context.isIE || al.hasAttribute('href')) {
+				al.removeAttribute('href');
+			}
+			al.className = 'inactive';
+			al.onclick = null;
+		}
+		else {
+			al.setAttribute('href', '#scroller:previous');
+			al.className = '';
+			al.onclick = context.setHandleScroll(context);
+		}
+
+		//Check right boundary.
+		if((total <= visible) || (item >= (total - visible))) {
+			if(context.isIE || ar.hasAttribute('href')) {
+				ar.removeAttribute('href');
+			}
+			ar.className = 'inactive';
+			ar.onclick = null;
+		}
+		else {
+			ar.setAttribute('href', '#scroller:next');
+			ar.className = '';
+			ar.onclick = context.setHandleScroll(context);
+		}
+	}
+
+
+	/**
+	 * disableLinks
+	 * Disables both scrolling links.
+	 *
+	 * @param context The object scope context.
+	 */
+	this.disableLinks = function(context) {
+
+		//Reference control links.
+		var al = document.getElementById(context.id+'_nav_previous');
+		var ar = document.getElementById(context.id+'_nav_next');
+
+		//Remove clickability, event handlers, set classes to "inactive."
+		if(context.isIE || al.hasAttribute('href')) {
+			al.removeAttribute('href');
+		}
+		al.className = 'inactive';
+		al.onclick = null;
+		if(context.isIE || ar.hasAttribute('href')) {
+			ar.removeAttribute('href');
+		}
+		ar.className = 'inactive';
+		ar.onclick = null;
+	}
+
+
+	//Call the constructor.
+	this.init();
+}
+
+</script>
+
+
+
+<div id="scroller"></div>
+
+<script type="text/javascript">
+
+/*
+ * Use case example...
+ */
+
+//Load or download the JSON data object.
+var scroll_data = <?php include($_SERVER['DOCUMENT_ROOT'].'/_manage/modules/headlines/export.php'); ?>;
+
+//Instantiate the scroller.
+var scr = new Scroller('scroller', scroll_data, 134, 2);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div#topphoto {
+/* remove margin when placing on page */
+margin: 20px 0 0 400px;
+
+	position: relative;
+	top: auto;
+	left: auto;
+	width: 330px;
+	height: 266px;
+	border: solid 1px #666666;
+	color: inherit;
+	background-color: #CCCCCC;
+}
+	div#topphoto div.slide {
+		position: absolute;
+		top: auto;
+		left: auto;
+		width: 330px;
+		height: 266px;
+		background-position: left top;
+		background-repeat: no-repeat;
+		background-color: transparent;
+		background-image: url(/dev/testimage.jpg);
+	}
+	div#topphoto h3 {
+		margin: 0;
+		padding: 4px 7px;
+		border-bottom: solid 1px #333333;
+		color: #000000;
+		background-color: #FFFFFF;
+		opacity: 0.75;
+		font-size: 140%;
+		font-family: Tahoma, sans-serif;
+	}
+	* html div#topphoto h3 {
+		width: 316px;
+		filter: alpha(opacity=75);
+	}	
+		div#topphoto h3 a {
+			color: #000000;
+			background-color: transparent;
+			text-decoration: none;
+		}
+	div#topphoto p {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 316px;
+		height: 29px;
+		margin: 0;
+		padding: 3px 7px;
+		border-top: solid 1px #666666;
+		overflow: hidden;
+		color: #FFFFFF;
+		background-color: #4567A5;
+		background-image: url(/_skins/200710/graphics/texture_tile.png);
+		background-repeat: repeat;
+		background-position: left top;
+		font-weight: bold;
+	}
+		div#topphoto p a {
+			color: #FFFFFF;
+			background-color: transparent;
+			text-decoration: none;
+		}
+	div#topphoto ul.control {
+		position: absolute;
+		right: 5px;
+		bottom: 41px;
+		list-style: none;
+		text-align: right;
+	}
+		div#topphoto ul.control li {
+			float: left;
+		}
+			div#topphoto ul.control li a {
+				display: block;
+				margin: 0 3px;
+				padding: 0;
+				width: 16px;
+				height: 16px;
+				text-align: center;
+				vertical-align: middle;
+				overflow: hidden;
+				border: solid 1px #333333;
+				color: #FFFFFF;
+				background-color: #999999;
+				text-decoration: none;
+				font-weight: bold;
+				text-align: center;
+				opacity: 0.8;
+			}
+			* html div#topphoto ul.control li a {
+				filter: alpha(opacity=80);			
+			}			
+			div#topphoto ul.control li a:hover {
+				border: solid 1px #FFFFFF;
+				color: #FFFFFF;
+				background-color: #666666;
+			}
+			div#topphoto ul.control li a.current {
+				border: solid 1px #FFFFFF;
+				color: #FFFFFF;
+				background-color: #3B578C;
+			}
+			div#topphoto ul.control li a.current:hover {
+				border: solid 1px #FFFFFF;
+				color: #FFFFFF;
+				background-color: #3B578C;
+			}
+			div#topphoto ul.control li a.play,
+			div#topphoto ul.control li a.pause {
+				background-repeat: no-repeat;
+				background-color: #999999;
+				background-image: url(/_skins/200710/graphics/crossfader.gif);
+			}
+			div#topphoto ul.control li a.play:hover,
+			div#topphoto ul.control li a.pause:hover {
+				background-color: #666666;
+			}
+			div#topphoto ul.control li a.play {
+				background-position: 50% 0;
+			}
+			div#topphoto ul.control li a.pause {
+				background-position: 50% -16px;
+			}
+				div#topphoto ul.control li a.play span,
+				div#topphoto ul.control li a.pause span {
+					display: none;
+				}
+</style>
+
+<script type="text/javascript">
+
+/**
+ * CrossFader
+ * Simple handler to crossfade multiple "pages" of content within an
+ * area of the page.  The content is fed through a loose data structure.
+ *
+ * @author Zac Hester
+ * @date 2007-09-26
+ *
+ * @param target_element The DOM element or ID of the root element.
+ * @param data A loose data structure of the content to display.
+ */
+function CrossFader(target_element, data) {
+
+	//Core properties.
+	this.data = data;
+
+	//Animation tweaks.
+	this.total_frames = 20;
+	this.frame_delay = 60;
+	this.page_delay = 7000;
+
+	//Reference handlers.
+	this.user_element = null;
+	this.control_element = null;
+	this.id = null;
+	this.current_page = 0;
+
+	//Stacking variables.
+	this.start_layer = 32;
+	this.active_layer = this.start_layer + data.length + 1;
+	this.staging_layer = this.active_layer + 1;
+
+	//Animation variables.
+	this.current_frame = 0;
+	this.frame_timer = null;
+	this.page_timer = null;
+	this.next_page = 0;
+	this.playstate = true;
+
+	//Utility.
+	this.isIE = (navigator.userAgent.indexOf('MSIE')!=-1) ? true : false;
+
+
+	/**
+	 * Constructor
+	 */
+	this.init = function() {
+
+		//Private stuff.
+		var slide, h3, p, li, a;
+
+		//Initialization.
+		if(typeof(target_element) == 'object') {
+			this.user_element = target_element;
+		}
+		else if(typeof(target_element) == 'string') {
+			this.user_element = document.getElementById(target_element);
+		}
+		else {
+			throw('Invalid target element specifcation for Scroller().');
+		}
+		this.id = this.user_element.id;
+
+		//Build the document fragment.
+		for(var i = 0; i < this.data.length; ++i) {
+			slide = document.createElement('div');
+			slide.id = this.id+'_'+i;
+			slide.className = 'slide';
+			slide.style.zIndex = this.start_layer + this.data.length - i;
+			slide.style.backgroundImage = 'url('
+				+this.data[i]['thumbnail_uri']+')';
+			h3 = document.createElement('h3');
+			h3.innerHTML = '<a href="'+this.data[i]['uri']
+				+'">'+this.data[i]['headline']+'</a>';
+			slide.appendChild(h3);
+			p = document.createElement('p');
+			p.innerHTML = '<a href="'+this.data[i]['uri']
+				+'">'+this.data[i]['cutline']+'</a>';
+			slide.appendChild(p);
+			this.user_element.appendChild(slide);
+		}
+		this.control_element = document.createElement('ul');
+		this.control_element.id = this.id+'_control';
+		this.control_element.className = 'control';
+		this.control_element.style.zIndex = this.staging_layer + 1;
+		this.user_element.appendChild(this.control_element);
+		this.buildControls(this);
+
+		//Begin automatic paging.
+		this.page_timer = setTimeout(
+			this.setTimeoutHandler(this),
+			this.page_delay
+		);
+	}
+
+
+	/**
+	 * setClickHandler
+	 * Assigns the click handler for paging to any slide.
+	 */
+	this.setClickHandler = function(context) {
+
+		//Return click handler.
+		return(function(evt) {
+
+			//Stop anything that's currently happening.
+			context.playstate = false;
+			if(context.page_timer) {
+				clearTimeout(context.page_timer);
+			}
+			if(context.fade_timer) {
+				clearInterval(context.fade_timer);
+			}
+
+			//Acquire the anchor element.
+			var cnode = null;
+			if(context.isIE) { cnode = window.event.srcElement; }
+			else { cnode = evt.target; }
+			while(cnode.tagName != 'A') { cnode = cnode.parentNode; }
+
+			//Parse click parameter.
+			var param = cnode.hash.split(/:/)[1];
+
+			//Check for play.
+			if(param == 'play') {
+				context.playstate = true;
+				context.page_timer = setTimeout(
+					context.setTimeoutHandler(context),
+					context.page_delay
+				);
+				context.removeChildren(
+					document.getElementById(context.id+'_control')
+				);
+				context.buildControls(context);
+			}
+
+			//Check for pause.
+			else if(param == 'pause') {
+				clearTimeout(context.page_timer);
+				context.page_timer = null;
+				context.playstate = false;
+				context.removeChildren(
+					document.getElementById(context.id+'_control')
+				);
+				context.buildControls(context);
+			}
+
+			//Otherwise, transition to the designated page.
+			else {
+				context.jumpTo(context, parseInt(param));
+			}
+
+			//Prevent traversal.
+			return(false);
+		});
+	}
+
+
+	/**
+	 * setTimeoutHandler
+	 * Assigns the handler for automatic transitions.
+	 */
+	this.setTimeoutHandler = function(context) {
+
+		//Return the event handler.
+		return(function() {
+
+			//Next index.
+			var next_page = context.current_page + 1;
+
+			//Check for wrap-around.
+			if(next_page >= context.data.length) {
+				next_page = 0;
+			}
+
+			//Transition to next page.
+			context.jumpTo(context, next_page);
+		});
+	}
+
+
+	/**
+	 * setFrameHandler
+	 * Handles each frame of animated transitions (cross fading).
+	 */
+	this.setFrameHandler = function(context) {
+
+		//Return the event handler.
+		return(function() {
+
+			//Abbreviations.
+			var cf = context.current_frame;
+			var tf = context.total_frames;
+			var cp = context.current_page;
+			var np = context.next_page;
+			var dl = context.data.length;
+
+			//Set the opacity of the target frame.
+			var ne = document.getElementById(context.id+'_'+np);
+			context.setOpacity(ne, (cf / tf));
+
+			//Check for end of animation.
+			if(cf >= tf) {
+
+				//Stop animation.
+				clearInterval(context.frame_timer);
+				context.frame_timer = null;
+
+				//Make sure it's fully opaque.
+				context.setOpacity(ne, 1.0);
+
+				//Reset stacking and promote new "current" page.
+				var ce = document.getElementById(context.id+'_'+cp);
+				ce.style.zIndex = context.start_layer + dl - cp;
+				ne.style.zIndex = context.active_layer;
+
+				//Increment page pointer.
+				context.current_page = np;
+
+				//Add the controls.
+				context.buildControls(context);
+
+				//Check for automatic transitions.
+				if(context.playstate) {
+
+					//Set timeout for next page.
+					context.page_timer = setTimeout(
+						context.setTimeoutHandler(context),
+						context.page_delay
+					);
+				}
+			}
+
+			//Increment frame pointer.
+			++context.current_frame;
+		});
+	}
+
+
+	/**
+	 * jumpTo
+	 * Begins an animated transition to any page.
+	 */
+	this.jumpTo = function(context, page) {
+
+		//Clear controls.
+		context.removeChildren(
+			document.getElementById(context.id+'_control')
+		);
+
+		//Stage the target page.
+		var ne = document.getElementById(context.id+'_'+page);
+		context.setOpacity(ne, 0);
+		ne.style.zIndex = context.staging_layer;
+
+		//Set next pointer.
+		context.next_page = page;
+
+		//Reset frame pointer.
+		context.current_frame = 0;
+
+		//Begin the animated transition.
+		context.frame_timer = setInterval(
+			context.setFrameHandler(context),
+			context.frame_delay
+		);
+	}
+
+
+	/**
+	 * buildControls
+	 * Builds the control links.
+	 */
+	this.buildControls = function(context) {
+
+		//Abbreviation.
+		var ctl = context.control_element;
+
+		//Add current kids.
+		for(var i = 0; i < context.data.length; ++i) {
+			li = document.createElement('li');
+			a = document.createElement('a');
+			if(context.current_page == i) {
+				a.className = 'current';
+			}
+			else {
+				a.setAttribute('href', '#crossfader:'+i);
+				a.onclick = context.setClickHandler(context);
+			}
+			a.innerHTML = (i+1).toString();
+			li.appendChild(a);
+			ctl.appendChild(li);
+		}
+
+		//Play/pause button.
+		li = document.createElement('li');
+		a = document.createElement('a');
+		if(context.playstate) {
+			a.setAttribute('href', '#crossfader:pause');
+			a.innerHTML = '<span>| |</span>';
+			a.className = 'pause';
+		}
+		else {
+			a.setAttribute('href', '#crossfader:play');
+			a.innerHTML = '<span>&raquo;</span>';
+			a.className = 'play';
+		}
+		a.onclick = context.setClickHandler(context);
+		li.appendChild(a);
+		ctl.appendChild(li);
+	}
+
+
+	/**
+	 * setOpacity
+	 * Sets the opacity level for any element in most browsers.
+	 */
+	this.setOpacity = function(ele, level) {
+
+		//Check limits for valid opacity values.
+		if((level >= 0.0) && (level <= 1.0)) {
+
+			//MSIE style settings.
+			if(navigator.userAgent.indexOf('MSIE') != -1) {
+				ele.style.filter = 'alpha(opacity='+Math.ceil(level*100)+')';
+			}
+
+			//Every other browser.
+			else {
+				ele.style.opacity = (level+0.0).toString();
+			}
+		}
+	}
+
+
+	/**
+	 * removeChildren
+	 * Removes all children of an element.
+	 */
+	this.removeChildren = function(ele) {
+
+		//Get an initial count.
+		var nkids = ele.childNodes.length;
+
+		//Make sure there's something to remove.
+		if(nkids) {
+
+			//Delete each child.
+			for(var i = nkids-1; i >= 0; --i) {
+				ele.removeChild(ele.childNodes[i]);
+			}
+		}
+	}
+
+
+	//Initialize the object.
+	this.init();
+}
+</script>
+
+<div id="topphoto">
+</div>
+<script type="text/javascript">
+var cf_data = <?php include($_SERVER['DOCUMENT_ROOT'].'/_manage/modules/topphoto/export.php'); ?>;
+var cf = new CrossFader('topphoto', cf_data);
+</script>
+
+<!--
+<div id="topphoto">
+	<div class="slide" id="topphoto_0">
+		<h3>
+			<a href="">Short Headline 1</a>
+		</h3>
+		<p>
+			<a href="">
+Lorem ipsum dolor sit amet consectetuer nunc ac neque egestas condimentum.
+Sem Pellentesque non eu leo odio magna malesuada commodo Nam libero.
+Dui congue euismod tortor Vestibulum orci id massa tincidunt adipiscing In.
+Tempor morbi justo consequat facilisis neque non leo turpis sem Nulla.
+			</a>
+		</p>
+	</div>
+
+	<div class="slide" id="topphoto_1">
+		<h3>
+			<a href="">Short Headline 2</a>
+		</h3>
+		<p>
+			<a href="">
+Lorem ipsum dolor sit amet consectetuer nunc ac neque egestas condimentum.
+Sem Pellentesque non eu leo odio magna malesuada commodo Nam libero.
+Dui congue euismod tortor Vestibulum orci id massa tincidunt adipiscing In.
+Tempor morbi justo consequat facilisis neque non leo turpis sem Nulla.
+			</a>
+		</p>
+	</div>
+
+	<div class="slide" id="topphoto_2">
+		<h3>
+			<a href="">Short Headline 3</a>
+		</h3>
+		<p>
+			<a href="">
+Lorem ipsum dolor sit amet consectetuer nunc ac neque egestas condimentum.
+Sem Pellentesque non eu leo odio magna malesuada commodo Nam libero.
+Dui congue euismod tortor Vestibulum orci id massa tincidunt adipiscing In.
+Tempor morbi justo consequat facilisis neque non leo turpis sem Nulla.
+			</a>
+		</p>
+	</div>
+
+	<ul class="control" id="topphoto_control">
+		<li><a href="">1</a></li>
+		<li><a href="" class="current">2</a></li>
+		<li><a href="">3</a></li>
+		<li><a href="">4</a></li>
+		<li><a href="">| |</a></li>
+	</ul>
+</div>
+-->
+
+
