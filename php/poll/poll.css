@@ -1,0 +1,45 @@
+/* Poll Box Styles - Zac Hester - 2005-05-24 */
+div.pollbox { border:solid 1px #000000; }
+div.pollbox h4 { margin:0; padding:5px; font-size:110%;
+	color:#000066; background:transparent; }
+div.pollbox h5 { margin:0; padding:5px; font-size:100%; }
+div.pollbox h6 { margin:0; padding:5px; font-size:100%;
+	color:#CC0000; background:transparent; }
+div.pollbox ul { list-style:none; margin:0; padding:0; }
+div.pollbox ul li { margin:2px 0; padding:0; background-position:top right; }
+div.pollbox ul li span { margin:0; padding:0 7px;
+	 background-position:top left; }
+div.pollbox p { margin:0; padding:2px 5px; }
+div.pollbox form { margin:0; padding:0; }
+div.pollbox ul li.option_0 { background-image:url('gfx/poll_opt0_00.gif'); }
+div.pollbox ul li.option_1 { background-image:url('gfx/poll_opt0_01.gif'); }
+div.pollbox ul li.option_2 { background-image:url('gfx/poll_opt0_02.gif'); }
+div.pollbox ul li.option_3 { background-image:url('gfx/poll_opt0_03.gif'); }
+div.pollbox ul li.option_4 { background-image:url('gfx/poll_opt0_04.gif'); }
+div.pollbox ul li.option_5 { background-image:url('gfx/poll_opt0_05.gif'); }
+div.pollbox ul li.option_6 { background-image:url('gfx/poll_opt0_06.gif'); }
+div.pollbox ul li.option_7 { background-image:url('gfx/poll_opt0_07.gif'); }
+div.pollbox ul li.option_8 { background-image:url('gfx/poll_opt0_08.gif'); }
+div.pollbox ul li.option_9 { background-image:url('gfx/poll_opt0_09.gif'); }
+div.pollbox ul li.option_10 { background-image:url('gfx/poll_opt0_10.gif'); }
+div.pollbox ul li.option_11 { background-image:url('gfx/poll_opt0_11.gif'); }
+div.pollbox ul li.option_12 { background-image:url('gfx/poll_opt0_12.gif'); }
+div.pollbox ul li.option_13 { background-image:url('gfx/poll_opt0_13.gif'); }
+div.pollbox ul li.option_14 { background-image:url('gfx/poll_opt0_14.gif'); }
+div.pollbox ul li.option_15 { background-image:url('gfx/poll_opt0_15.gif'); }
+div.pollbox ul li.option_0 span { background-image:url('gfx/poll_opt1_00.gif'); }
+div.pollbox ul li.option_1 span { background-image:url('gfx/poll_opt1_01.gif'); }
+div.pollbox ul li.option_2 span { background-image:url('gfx/poll_opt1_02.gif'); }
+div.pollbox ul li.option_3 span { background-image:url('gfx/poll_opt1_03.gif'); }
+div.pollbox ul li.option_4 span { background-image:url('gfx/poll_opt1_04.gif'); }
+div.pollbox ul li.option_5 span { background-image:url('gfx/poll_opt1_05.gif'); }
+div.pollbox ul li.option_6 span { background-image:url('gfx/poll_opt1_06.gif'); }
+div.pollbox ul li.option_7 span { background-image:url('gfx/poll_opt1_07.gif'); }
+div.pollbox ul li.option_8 span { background-image:url('gfx/poll_opt1_08.gif'); }
+div.pollbox ul li.option_9 span { background-image:url('gfx/poll_opt1_09.gif'); }
+div.pollbox ul li.option_10 span { background-image:url('gfx/poll_opt1_10.gif'); }
+div.pollbox ul li.option_11 span { background-image:url('gfx/poll_opt1_11.gif'); }
+div.pollbox ul li.option_12 span { background-image:url('gfx/poll_opt1_12.gif'); }
+div.pollbox ul li.option_13 span { background-image:url('gfx/poll_opt1_13.gif'); }
+div.pollbox ul li.option_14 span { background-image:url('gfx/poll_opt1_14.gif'); }
+div.pollbox ul li.option_15 span { background-image:url('gfx/poll_opt1_15.gif'); }

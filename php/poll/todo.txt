@@ -1,0 +1,7 @@
+-Enter a poll through a simple form (_mcp)
+-Edit a poll with the same form and rewrite "title" fields.
+
+-Display a poll with voting
+-Display poll results
+
+-Create a demo style sheet
