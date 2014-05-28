@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="800" height="640"
+	>
+<style type="text/css"><![CDATA[
+text {
+	fill: #333333;
+	font-size: 13px;
+	font-family: Arial,Verdana,sans-serif;
+}
+.UIFrame {
+}
+	.UIFrame>text {
+		font-weight: bold;
+	}
+	.UIFrame>rect {
+		fill: #F8F8F8;
+		stroke: #CCCCCC;
+		stroke-width: 1px;
+		shape-rendering: crispEdges;
+	}
+	.UIFrame>rect.titlebar {
+		fill: #E0E0E0;
+		stroke: #CCCCCC;
+		stroke-width: 1px;
+	}
+	.drag {
+		cursor: move;
+	}
+.sysdot {
+	fill: #6699FF;
+	stroke: #555555;
+	stroke-width: 1px;
+	stroke-opacity: 0.5;
+}
+.edge {
+	fill: none;
+	stroke: #777777;
+	stroke-width: 1px;
+	stroke-opacity: 0.5;
+}
+.range {
+	fill: #CCCCCC;
+	fill-opacity: 0.3;
+	stroke: #999999;
+	stroke-opacity: 0.3;
+	stroke-width: 1px;
+}
+]]></style>
+<script type="text/javascript"><![CDATA[
+
+/*
+UIFrames could also:
+- Have a "force input" mode that locks out the rest of the UI until the
+	user has clicked 'okay' or entered something
+- Implement a "focus" setting that updates the class of the base group
+	- Focus also brings the frame to the top of the stack
+	- A UI-wide setting would make focus for mouseover or click
+- Implement scrolling of contents in the body element
+	- The currently focused frame would scroll with the mouse wheel, arrows
+- Implement frame hiding
+	- Internally hide a frame just to preserve the object
+	- Hide a frame by request of the user (lives in a global "task" list)
+- Need to implement a frame manager to coordinate changes in global UI state
+*/
+
+function UIFrame(w, h, title) {
+	this.ns = 'http://www.w3.org/2000/svg';
+	this.xns = 'http://www.w3.org/1999/xlink';
+	this.th = 20;
+	this.element = document.createElementNS(this.ns, 'g');
+	this.element.className.baseVal = 'UIFrame';
+	this.frame = document.createElementNS(this.ns, 'rect');
+	this.frame.setAttribute('x', '0');
+	this.frame.setAttribute('y', '0');
+	this.frame.setAttribute('width', w);
+	this.frame.setAttribute('height', h);
+	this.element.appendChild(this.frame);
+	this.tbar = document.createElementNS(this.ns, 'rect');
+	this.tbar.setAttribute('x', '0');
+	this.tbar.setAttribute('y', '0');
+	this.tbar.setAttribute('width', w);
+	this.tbar.setAttribute('height', this.th);
+	this.tbar.className.baseVal = 'titlebar';
+	this.element.appendChild(this.tbar);
+	this.title = document.createElementNS(this.ns, 'text');
+	this.title.setAttribute('x', '5');
+	this.title.setAttribute('y', (this.th-5));
+	this.title.appendChild(document.createTextNode(title));
+	this.element.appendChild(this.title);
+	this.body = document.createElementNS(this.ns, 'g');
+	this.body.setAttribute('transform', 'translate(0,'+this.th+')');
+	this.element.appendChild(this.body);
+}
+
+UIFrame.prototype.makeDraggable = function() {
+	this.dragBox = arguments[0] ? arguments[0] : null;
+	this.tbar.className.baseVal = 'titlebar drag';
+	this.tbar.addEventListener(
+		'mousedown',
+		this.getMoveListener('mousedown'),
+		true
+	);
+	this.title.className.baseVal = 'drag';
+	this.title.addEventListener(
+		'mousedown',
+		this.getMoveListener('mousedown'),
+		true
+	);
+};
+
+UIFrame.prototype.getRoot = function() {
+	return this.element;
+};
+
+UIFrame.prototype.getBody = function() {
+	return this.body;
+};
+
+UIFrame.prototype.addText = function(text) {
+	var txt, ts, txts = this.body.getElementsByTagName('text');
+	if(txts.length == 0) {
+		txt = document.createElementNS(this.ns, 'text');
+		txt.setAttribute('transform', 'translate(5,0)');
+		ts = document.createElementNS(this.ns, 'tspan');
+		ts.setAttribute('x', '0');
+		ts.setAttribute('dy', '15');
+		ts.appendChild(document.createTextNode(text));
+		txt.appendChild(ts);
+		this.body.appendChild(txt);
+	}
+	else {
+		ts = document.createElementNS(this.ns, 'tspan');
+		ts.setAttribute('x', '0');
+		ts.setAttribute('dy', '15');
+		ts.appendChild(document.createTextNode(text));
+		txts[0].appendChild(ts);
+	}
+};
+
+UIFrame.prototype.getMoveListener = function(type) {
+	var context = this;
+	if(type == 'mousemove') {
+		return function(e) {
+			var newx = (context.startBox.x + (e.clientX - context.startX));
+			var newy = (context.startBox.y + (e.clientY - context.startY));
+			if(context.dragBox != null) {
+				if(newx < 0) {
+					newx = 0;
+				}
+				else if(
+					( newx + context.startBox.width )
+					>
+					context.dragBox.width
+				) {
+					newx = (context.dragBox.width - context.startBox.width);
+				}
+				if(newy < 0) {
+					newy = 0;
+				}
+				else if(
+					( newy + context.startBox.height )
+					>
+					context.dragBox.height
+				) {
+					newy = (context.dragBox.height - context.startBox.height);
+				}
+			}
+			context.element.setAttribute(
+				'transform', 'translate('+newx+','+newy+')'
+			);
+		};
+	}
+	else if(type == 'mousedown') {
+		return function(e) {
+			context.startBox = context.element.getBBox();
+			var t = context.element.getScreenCTM();
+			context.startBox.x += t.e;
+			context.startBox.y += t.f;
+			context.startX = e.clientX;
+			context.startY = e.clientY;
+			context.moveListener = context.getMoveListener('mousemove');
+			context.upListener = context.getMoveListener('mouseup');
+			window.addEventListener('mousemove', context.moveListener, true);
+			window.addEventListener('mouseup', context.upListener, true);
+			e.stopPropagation();
+			e.preventDefault();
+		};
+	}
+	else {
+		return function(e) {
+			window.removeEventListener('mousemove',context.moveListener,true);
+			window.removeEventListener('mouseup', context.upListener, true);
+		};
+	}
+};
+
+
+/*****************************************************************************
+	UIManager
+	Manages the UI at the global level.
+*****************************************************************************/
+function UIManager(root, w, h) {
+	this.frames = [];
+}
+
+
+/*****************************************************************************
+	CommerceGame
+	Manages the logic and assets to play the game.
+
+- Current system info
+	- Name
+	- Population
+	- Tech level
+	- Government style
+	- Special property
+	- Import customs
+	- Pirates
+- Target system info
+	(stuff from above, if known to player)
+- Current system inventory
+- Target system inventory
+- Current system resources
+	- ships, upgrades, crew for hire, quests, news
+- Player stats/status window
+	- Name
+	- Level/xp
+	- Reputations (per tech levels, gov style, pirates, customs)
+	- Cash, debt, property, total
+	- Skills
+	- Difficulty, time(days|jumps)
+- Ship stats/status window
+- Navigation window
+- Player notes window (place to jot things down)
+*****************************************************************************/
+function CommerceGame(element, w, h) {
+	//move stuff to UIManager
+	this.ns = 'http://www.w3.org/2000/svg';
+	this.xns = 'http://www.w3.org/1999/xlink';
+	this.root = element;
+	this.uilastslot = -1;
+	this.conf = {
+		'width': w,
+		'height': h
+	};
+	this.uie = {
+		'world': null,
+		'nav': null,
+		'events': null,
+		'debug': null
+	};
+	//Some state data needs to be initialized from UI.
+	this.state = {
+		'player': {
+			'name': 'Player',
+			'level': 1,
+			'xp': 0,
+			'system': 0,
+			'stats': {
+				'Diplomat': 0,
+				'Helm': 0,
+				'Tactical': 0,
+				'Engineering': 0
+			},
+			'ship': {
+				//Current values... ship type and equip determines max values
+				'type': 0,
+				'hull': 10,
+				'shields': 0,
+				'fuel': 10,
+				//ship type determines number of each equip slot
+				'equip': {
+					'tact': [],
+					'helm': [],
+					'nav': [],
+					'eng': [],
+					'comm': [],
+					'cargo': []
+				}
+			}
+		},
+		'world': {
+			'nsystems': 80,
+			'systems': [],
+			'nsectors': 100,
+			'sectors': []
+		}
+	};
+	//This should be loaded on demand over HTTP
+	this.assets = {
+		'ships': [
+			//Type 0 (starter) ship
+			{
+				'hull': 10,
+				'shields': 0,
+				'fuel': 10,
+				'equip': {
+					'tact': 1,
+					'helm': 0,
+					'nav': 0,
+					'eng': 0,
+					'comm': 1,
+					'cargo': 1
+				}
+			}
+		],
+		'systems': [
+			'Blornaxx',
+			'Beatleguese',
+			'Akron',
+			'Tiberia',
+			'Montoya'
+		]
+	};
+
+	this.debug('Generating World');
+	this.uie.world = new UIFrame(200, 220, 'Galactic Map');
+	this.attachFrame(this.uie.world);
+	var wbody = this.uie.world.getBody();
+	wbody.id = 'world_body';
+	var sys = null, sysdot = null;
+	for(var i = 0; i < 80; ++i) {
+		sys = this.createSystem(i);
+		this.state.world.systems.push(sys);
+		sysdot = document.createElementNS(this.ns, 'circle');
+		sysdot.id = 'sys_'+i;
+		sysdot.className.baseVal = 'sysdot';
+		sysdot.setAttribute('r', 3);
+		sysdot.setAttribute('cx', sys.x);
+		sysdot.setAttribute('cy', sys.y);
+		wbody.appendChild(sysdot);
+	}
+
+	this.debug('Placing Ship');
+	this.state.player.system = Math.floor(
+		Math.random() * this.state.world.nsystems);
+
+	this.updateWorldMap();
+}
+
+
+CommerceGame.prototype.attachFrame = function(frame) {
+	var froot = frame.getRoot();
+	var slot = this.uilastslot + 1;
+	//var xwrap = this.conf['width'];
+	//figure out how to wrap... set tile sizes?
+	//layout grid?
+	var tilex = slot * frame.frame.getAttribute('width');
+	var tiley = 0;
+	froot.setAttribute('transform', 'translate('+tilex+','+tiley+')');
+	this.root.appendChild(froot);
+	this.uilastslot++;
+};
+
+
+CommerceGame.prototype.createSystem = function(i) {
+	var sys = {
+		'id': i,
+		//pick from list in this.assets.systems
+		'name': 'System '+i,
+		'branches': 0
+	}
+	var sw = 200 / (this.state.world.nsectors / 10);
+	var sh = 200 / (this.state.world.nsectors / 10);
+	var sc = this.getNewSector(i);
+	sys.sx = sc[0];
+	sys.sy = sc[1];
+	var pad = 3;
+	var xmin = sys.sx * sw + pad;
+	var xmax = sys.sx * sw + (sw - pad);
+	var ymin = sys.sy * sh + pad;
+	var ymax = sys.sy * sh + (sh - pad);
+	sys.x = Math.random() * (xmax - xmin) + xmin;
+	sys.y = Math.random() * (ymax - ymin) + ymin;
+	return sys;
+};
+
+CommerceGame.prototype.getNewSector = function(i) {
+	var div = this.state.world.nsectors / 10;
+	var rx = Math.floor(Math.random() * div);
+	var ry = Math.floor(Math.random() * div);
+	while(
+		( this.state.world.sectors[rx] != null )
+		&&
+		( this.state.world.sectors[rx][ry] != null )
+	) {
+		rx = Math.floor(Math.random() * div);
+		ry = Math.floor(Math.random() * div);
+	}
+	if(this.state.world.sectors[rx] == null) {
+		this.state.world.sectors[rx] = [];
+	}
+	this.state.world.sectors[rx][ry] = i;
+	return [rx, ry];
+};
+
+CommerceGame.prototype.updateWorldMap = function() {
+	if(this.rangeCircle == null) {
+		this.rangeCircle = document.createElementNS(this.ns, 'circle');
+		this.rangeCircle.id = 'player_range';
+		this.rangeCircle.className.baseVal = 'range';
+		var wbody = this.uie.world.getBody();
+		wbody.insertBefore(this.rangeCircle, wbody.firstChild);
+	}
+	var sys = this.state.world.systems[this.state.player.system];
+	this.rangeCircle.setAttribute('cx', sys.x);
+	this.rangeCircle.setAttribute('cy', sys.y);
+	//calculate real range
+	this.rangeCircle.setAttribute('r', 30);
+	//work out how to clip out the range circle...
+	//this.rangeCircle.style.clipPath = 'url(#world_body)';
+	//this.rangeCircle.setAttribute('clip-path', '');
+	//remove highlight from old sysdots
+	//highlight current sysdot
+}
+
+CommerceGame.prototype.debug = function(msg) {
+	if(this.uie.debug == null) {
+		this.uie.debug = new UIFrame(200, 220, 'Debug Output');
+		this.attachFrame(this.uie.debug);
+	}
+	this.uie.debug.addText(msg);
+};
+
+var game = null;
+
+window.addEventListener(
+	'load',
+	function(e) {
+		var svg = document.getElementsByTagName('svg')[0];
+		game = new CommerceGame(
+			document.getElementById('root'),
+			svg.getAttribute('width'),
+			svg.getAttribute('height')
+		);
+	},
+	true
+);
+
+]]></script>
+<def>
+</def>
+<text x="10" y="20">Interactive UI Testing</text>
+<g id="root"></g>
+</svg>

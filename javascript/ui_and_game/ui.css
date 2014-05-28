@@ -1,0 +1,120 @@
+/* UI Styles and Visual States */
+
+/* Style Sheet - Zac Hester - 2009-02-09 */
+
+/* Core Tag Styles */
+body {
+	margin: 0;
+	padding: 0;
+	font: 10pt/130% Verdana,Geneva,sans-serif;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0.5em 0;
+	padding: 0;
+}
+h1 { font-size: 150%; }
+h2 { font-size: 140%; }
+h3 { font-size: 130%; }
+h4 { font-size: 120%; }
+h5 { font-size: 110%; }
+h6 { font-size: 100%; }
+p, address, blockquote, pre, ul, ol, dl, form {
+	margin: 0.5em 0;
+	padding: 0;
+}
+ul li, ol li {
+	margin: 0;
+	margin-left: 2em;
+}
+blockquote { padding: 0 2em; }
+img { border: none; }
+a {
+	color: #0000CC;
+	background-color: transparent;
+}
+a:link {
+	color: #0000CC;
+	background-color: transparent;
+}
+a:visited {
+	color: #000066;
+	background-color: transparent;
+}
+a:hover {
+	color: #00CC00;
+	background-color: transparent;
+}
+a:active {
+	color: #006600;
+	background-color: transparent;
+}
+
+
+
+.ui_frame {
+	min-width: 250px;
+	min-height: 250px;
+	border: solid 1px #CCCCCC;
+	background-color: #F8F8F8;
+	opacity: 0.4;
+}
+	.ui_frame.ui_user, .ui_frame.ui_control {
+		min-width: 250px;
+		min-height: 250px; 
+	}
+	.ui_frame.ui_dialog {
+		min-width: 300px;
+		min-height: 180px;
+	}
+.ui_frame.ui_focus {
+	opacity: 1.0;
+}
+.ui_titlebar {
+	position: relative;
+	border-bottom: solid 1px #CCCCCC;
+	background-color: #EEEEEE;
+}
+.ui_title {
+	padding: 2px 5px;
+	font-weight: bold;
+}
+.ui_control {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 40%;
+	text-align: right;
+}
+.ui_body {
+}
+.ui_widget {
+}
+.ui_log {
+	padding: 2px 5px;
+}
+	.ui_log>div {
+		padding: 1px 0;
+		border-bottom: dashed 1px #CCCCCC;
+	}
+
+.ui_draggable .ui_titlebar {
+	cursor: -moz-grab;
+}
+
+.ui_dragging, .ui_dragging .ui_titlebar {
+	cursor: -moz-grabbing;
+}
+
+.ui_lockout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: inherit;
+	background-color: #666666;
+	opacity: 0.4;
+}
+

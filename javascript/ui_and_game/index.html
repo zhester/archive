@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>UI Testing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="ui.css"/>
+<script type="text/javascript" src="ui.js"></script>
+<script type="text/javascript">
+var ui;
+window.addEventListener(
+	'load',
+	function(e) {
+		ui = new UIManager();
+		var dbg = ui.createFrame('Debug');
+		ui.addFrame(dbg);
+		var log = dbg.createWidget();
+		UIWidgetShop.makeLog(log);
+		dbg.addWidget(log);
+		log.append('debug message!');
+		log.append('debug message 2!');
+		dbg.makeDraggable({'x':0,'y':0,'w':800,'h':800});
+		var win2 = ui.createFrame('Example');
+		ui.addFrame(win2);
+		win2.makeDraggable({'x':0,'y':0,'w':800,'h':800});
+		var win3 = ui.createFrame('Example 2');
+		ui.addFrame(win3);
+		win3.makeDraggable({'x':0,'y':0,'w':800,'h':800});
+		//ui.showError('testing error dialog');
+		UIFrameShop.addClose(dbg);
+		//not an interface... testing only
+		//dbg.ui.control.appendChild(ui.getGraphic('fake'));
+	},
+	true
+);
+</script>
+</head>
+<body>
+
+<div id="user"></div>
+
+</body>
+</html>
